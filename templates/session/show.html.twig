@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail Session{% endblock %}
+
+{% block body %}
+    <h1>{{ session.titre }}</h1>
+
+    <p>par : {{ session.formateur.prenom ~ ' ' ~ session.formateur.nom}}</p>
+    
+{% endblock %}

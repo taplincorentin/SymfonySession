@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Stagiaire;
+use App\Repository\StagiaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,9 +12,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class StagiaireController extends AbstractController
 {
     #[Route('/stagiaire', name: 'app_stagiaire')]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(StagiaireRepository $stagiaireRepository): Response
     {
-        $stagiaires = $entityManager->getRepository(Stagiaire::class)->findAll();
+        $stagiaires = $stagiaireRepository->findAll(); //get all stagiaires
         return $this->render('stagiaire/index.html.twig', [
             'stagiaires' => $stagiaires
         ]);

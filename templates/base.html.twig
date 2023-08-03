@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {% block stylesheets %}
+        {% endblock %}
+
+        {% block javascripts %}
+        {% endblock %}
+    </head>
+    <body>
+        {% if app.user %} <!--if a user is connected -->
+            <a href="{{ path('app_logout') }}">Se déconnecter</a>
+        {% else %}
+            <a href="{{ path('app_logout') }}">Se connecter</a>
+            
+        {% endif %}
+
+        {% if is_granted("ROLE_ADMIN") %} <!-- only admin can go to registration page -->
+            <a href="{{ path('app_register') }}">Inscrire nouveau formateur</a>
+        {% endif %}
+
+        {% block body %}{% endblock %}
+    </body>
+</html>

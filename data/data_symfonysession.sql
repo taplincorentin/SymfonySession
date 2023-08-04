@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- Listage des données de la table symfonysession.doctrine_migration_versions : ~0 rows (environ)
+-- Listage des données de la table symfonysession.doctrine_migration_versions : ~1 rows (environ)
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
 	('DoctrineMigrations\\Version20230803085317', '2023-08-03 10:54:12', 102);
 
@@ -147,14 +147,15 @@ CREATE TABLE IF NOT EXISTS `stagiaire` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table symfonysession.stagiaire : ~6 rows (environ)
+-- Listage des données de la table symfonysession.stagiaire : ~7 rows (environ)
 INSERT INTO `stagiaire` (`id`, `nom`, `prenom`, `sexe`, `date_naissance`, `ville`, `email`, `telephone`) VALUES
 	(1, 'DIAZ', 'Rosa', 'F', '1983-05-16', 'Strasbourg', 'diaz@exemple.com', '0000000000'),
 	(2, 'PERALTA', 'Jacob', 'M', '1981-06-25', 'Haguenau', 'peralta@exemple.com', '0505050505'),
 	(3, 'SANTIAGO', 'Amy', 'F', '1983-07-12', 'Haguenau', 'santiago@exemple.com', '0606060606'),
 	(4, 'LINETTI', 'Gina', 'F', '1981-11-11', 'Kehl', 'linetti@exemple.com', '0707070707'),
 	(5, 'BOYLE', 'Charles', 'M', '1978-05-19', 'Sélestat', 'boyle@exemple.com', '0404040404'),
-	(6, 'JEFFORDS', 'Terrence', 'M', '1970-12-01', 'Bischeim', 'jeffords@exemple.com', '0303030303');
+	(6, 'JEFFORDS', 'Terrence', 'M', '1970-12-01', 'Bischeim', 'jeffords@exemple.com', '0303030303'),
+	(7, 'JUDY', 'Doug', 'M', '1975-02-17', 'Colmar', 'judy@exemple.com', '0909090909');
 
 -- Listage de la structure de table symfonysession. user
 CREATE TABLE IF NOT EXISTS `user` (

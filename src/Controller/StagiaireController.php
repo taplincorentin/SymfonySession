@@ -23,11 +23,22 @@ class StagiaireController extends AbstractController
     }
 
     #[Route('/stagiaire/new', name: 'new_stagiaire')]
-    public function new(Request $request): Response {
+    public function new(Request $request, EntityManagerInterface $entityManager): Response {
         $stagiaire = new Stagiaire();
 
         $form = $this->createForm(StagiaireType::class, $stagiaire);
 
+        $form->handleRequest($request); 
+
+        if ($form->isSubmitted() && $form->isValid()) { //if form submitted and valid
+            
+            $stagiaire = $form->getData();
+            $entityManager->persist($stagiaire); //prepare
+            $entityManager->flush(); //execute
+
+            return $this->redirectToRoute('app_stagiaire'); //redirect to stagiaireList
+
+        }
         return $this->render('stagiaire/new.html.twig', [
             'formAddStagiaire' => $form,
         ]);

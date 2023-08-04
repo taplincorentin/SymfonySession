@@ -3,14 +3,14 @@
 {% block title %}Sessions{% endblock %}
 
 {% block body %}
-    <h1>Liste des sessions : </h1>
+    <h1>Prochaines sessions : </h1>
 
     {% for session in sessions %}
         <div> 
             
             <p><a href="{{ path('show_session', {'id': session.id}) }}">{{ session.titre }}</a></p>
             <p>{{session.dateDebut | date('d-m-Y') ~ ' ' ~ session.dateFin | date('d-m-Y')}}</p>
-            <p>{{}}</p>
+            
         </div>
     {% endfor %}
 {% endblock %}

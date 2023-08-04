@@ -13,7 +13,7 @@ class SessionController extends AbstractController
     #[Route('/session', name: 'app_session')]
     public function index(SessionRepository $sessionRepository): Response
     {
-        $sessions = $sessionRepository->findAll(); //get all sessions
+        $sessions = $sessionRepository->findBy([], ["dateDebut" => "ASC"]); //get all sessions sorted from startDate
 
         return $this->render('session/index.html.twig', [
             'sessions' => $sessions

@@ -5,6 +5,23 @@
 {% block body %}
     <h1>{{ session.titre }}</h1>
 
-    <p>par : {{ session.formateur.prenom ~ ' ' ~ session.formateur.nom}}</p>
+    <p>Formateur : {{ session.formateur.prenom ~ ' ' ~ session.formateur.nom}}</p>
     
+
+    <div class='modules'>
+        <p>Modules de la session :</p>
+        {% for programme in session.programmes %}
+            {{ programme.module.nom ~ ' ' ~ programme.nbJours ~ ' jours' }} <br>
+        {% endfor %}
+    </div>
+
+    <div class="stagiaires">
+        <p>Stagiaires de la session :</p>
+        {% for stagiaire in session.stagiaires %}
+            <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire.prenom ~ ' ' ~ stagiaire.nom}}</a> <br>
+        {% endfor %}
+    </div>
+
+
+
 {% endblock %}

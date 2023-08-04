@@ -3,7 +3,7 @@
 {% block title %}Détail Session{% endblock %}
 
 {% block body %}
-    <h1>{{ session.titre }}</h1>
+    <h1>{{ session }}</h1>
 
     <p>Formateur : {{ session.formateur.prenom ~ ' ' ~ session.formateur.nom}}</p>
     
@@ -18,7 +18,7 @@
     <div class="stagiaires">
         <p>Stagiaires de la session :</p>
         {% for stagiaire in session.stagiaires %}
-            <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire.prenom ~ ' ' ~ stagiaire.nom}}</a> <br>
+            <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire }}</a> <br>
         {% endfor %}
     </div>
 

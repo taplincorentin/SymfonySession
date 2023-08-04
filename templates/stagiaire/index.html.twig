@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste Satgiaires{% endblock %}
+{% block title %}Liste Stagiaires{% endblock %}
 
 {% block body %}
     <h1>Liste des stagiaires : </h1>
 
     {% for stagiaire in stagiaires %}
-        {{ stagiaire.prenom ~ ' ' ~ stagiaire.nom}} <br>
+        {{ stagiaire }} <br>
     {% endfor %}
 {% endblock %}

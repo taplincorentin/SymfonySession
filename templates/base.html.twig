@@ -13,6 +13,8 @@
     <body>
         {% if app.user %} <!--if a user is connected -->
             <a href="{{ path('app_logout') }}">Se déconnecter</a>
+            <a href="{{ path('new_stagiaire') }}">Ajout stagiaire</a>
+            <a href="{{ path('new_session') }}">Ajout session</a>
         {% else %}
             <a href="{{ path('app_logout') }}">Se connecter</a>
             

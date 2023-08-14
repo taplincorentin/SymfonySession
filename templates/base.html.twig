@@ -11,20 +11,20 @@
         {% endblock %}
     </head>
     <body>
-        {% if app.user %} <!--if a user is connected -->
-            <a href="{{ path('app_logout') }}">Se déconnecter</a>
-            <a href="{{ path('new_stagiaire') }}">Ajout stagiaire</a>
-            <a href="{{ path('new_session') }}">Ajout session</a>
-        {% else %}
-            <a href="{{ path('app_logout') }}">Se connecter</a>
-            
-        {% endif %}
+        <a href="{{ path('app_logout') }}">Se déconnecter</a>
+        <a href="{{ path('new_stagiaire') }}">Ajout stagiaire</a>
+        <a href="{{ path('new_session') }}">Ajout session</a>
+        <a href="{{ path('new_formateur') }}">Ajout formateur</a>
+        <a href="{{ path('app_session') }}">Voir les sessions</a>
+        <a href="{{ path('app_stagiaire') }}">Voir les stagiaires</a>
+        <a href="{{ path('app_formateur') }}">Voir les formateurs</a>
+         
 
         {% if is_granted("ROLE_ADMIN") %} <!-- only admin can go to registration page -->
-            <a href="{{ path('app_register') }}">Inscrire nouveau formateur</a>
+            <a href="{{ path('app_register') }}">Créer un nouveau compte</a>
         {% endif %}
 
-        <a href="{{ path('app_session') }}">Voir les sessions</a>
+        
 
         {% block body %}{% endblock %}
     </body>

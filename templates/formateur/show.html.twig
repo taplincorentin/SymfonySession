@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail Formateur{% endblock %}
+
+{% block body %}
+    
+    <div class="formateurInfo">
+        <h1>{{ formateur }}</h1>
+        <p>Email : {{formateur.email}}</p>
+    </div>
+
+    <div class="formateurSessions">
+        <h3>Prochaines sessions</h3>
+        {% for session in formateur.sessions %}
+            <p>{{ session.titre ~ ' du ' ~ session.dateDebut | date('d/m/Y') ~ ' au ' ~ session.dateFin | date('d/m/Y') }}</p>
+        {% endfor %}
+    </div>
+    
+
+{% endblock %}

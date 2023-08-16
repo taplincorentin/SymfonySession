@@ -10,7 +10,11 @@
             
             <p><a href="{{ path('show_session', {'id': session.id}) }}">{{ session.titre }}</a></p>
             <p>{{session.dateDebut | date('d-m-Y') ~ ' ' ~ session.dateFin | date('d-m-Y')}}</p>
+            <a href="{{ path('delete_session', {'id': session.id}) }}">Delete</a>
+            <br>
             
         </div>
     {% endfor %}
+
+
 {% endblock %}

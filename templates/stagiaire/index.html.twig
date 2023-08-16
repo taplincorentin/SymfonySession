@@ -6,6 +6,8 @@
     <h1>Liste des stagiaires : </h1>
 
     {% for stagiaire in stagiaires %}
-        {{ stagiaire }} <br>
+        {{ stagiaire }} 
+        <a href="{{ path('delete_stagiaire', {'id': stagiaire.id}) }}">Delete</a>
+        <br> 
     {% endfor %}
 {% endblock %}

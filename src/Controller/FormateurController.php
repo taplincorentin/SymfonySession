@@ -23,8 +23,12 @@ class FormateurController extends AbstractController
     }
 
     #[Route('/formateur/new', name: 'new_formateur')]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response {
-        $formateur = new Formateur();
+    #[Route('/formateur/{id}/edit', name: 'edit_formateur')]
+    public function new_edit(Formateur $formateur = null, Request $request, EntityManagerInterface $entityManager): Response {
+        
+        if(!$formateur) { //condition if no stagiaire create new one otherwise it's an edit of the existing one
+            $formateur = new Formateur();
+        }
 
         $form = $this->createForm(FormateurType::class, $formateur);
 

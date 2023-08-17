@@ -22,9 +22,12 @@ class ProgrammeController extends AbstractController
 
 
     #[Route('/programme/new', name: 'new_programme')]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response {
-
-        $programme = new Programme();
+    #[Route('/programme/{id}/edit', name: 'edit_programme')]
+    public function new_edit(Programme $programme = null, Request $request, EntityManagerInterface $entityManager): Response {
+        
+        if(!$programme) { //condition if no programme create new one otherwise it's an edit of the existing one
+            $programme = new Programme();
+        }
 
         $form = $this->createForm(ProgrammeFormType::class, $programme);
 

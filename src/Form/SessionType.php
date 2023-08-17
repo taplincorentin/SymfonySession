@@ -26,6 +26,7 @@ class SessionType extends AbstractType
             ->add('formateur', EntityType::class,[
                 'class' => Formateur::class
             ])
+            //->add('stagiaires')
             ->add('valider', SubmitType::class)
             
         ;

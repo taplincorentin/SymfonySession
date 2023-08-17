@@ -8,6 +8,7 @@
     {% for stagiaire in stagiaires %}
         {{ stagiaire }} 
         <a href="{{ path('delete_stagiaire', {'id': stagiaire.id}) }}">Delete</a>
+        <a href="{{ path('edit_stagiaire', {'id': stagiaire.id}) }}">Edit</a>
         <br> 
     {% endfor %}
 {% endblock %}

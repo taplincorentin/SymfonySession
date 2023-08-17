@@ -23,8 +23,12 @@ class StagiaireController extends AbstractController
     }
 
     #[Route('/stagiaire/new', name: 'new_stagiaire')]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response {
-        $stagiaire = new Stagiaire();
+    #[Route('/stagiaire/{id}/edit', name: 'edit_stagiaire')]
+    public function new_edit(Stagiaire $stagiaire = null, Request $request, EntityManagerInterface $entityManager): Response {
+        
+        if(!$stagiaire) { //condition if no stagiaire create new one otherwise it's an edit of the existing one
+            $stagiaire = new Stagiaire();
+        }
 
         $form = $this->createForm(StagiaireType::class, $stagiaire);
 

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Session;
 use App\Form\SessionType;
+use App\Form\Session2Type;
 use App\Repository\SessionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,6 +44,33 @@ class SessionController extends AbstractController
         }
 
         return $this->render('session/new.html.twig', [
+            'formAddSession' => $form,
+        ]);
+
+    }
+
+    #[Route('/stession/{id}/edit', name: 'edit_session')]
+    public function new_edit(Session $session = null, Request $request, EntityManagerInterface $entityManager): Response {
+        
+        if(!$session) { //condition if no stagiaire create new one otherwise it's an edit of the existing one
+            $session = new Session();
+        }
+
+        $form = $this->createForm(Session2Type::class, $session);
+
+        $form->handleRequest($request); 
+
+        if ($form->isSubmitted() && $form->isValid()) { //if form submitted and valid
+            
+            $session = $form->getData();
+            $entityManager->persist($session); //prepare
+            $entityManager->flush(); //execute
+
+            return $this->redirectToRoute('app_session'); //redirect to sessionList
+
+        }
+
+        return $this->render('session/edit.html.twig', [
             'formAddSession' => $form,
         ]);
 

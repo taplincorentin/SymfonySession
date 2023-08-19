@@ -6,7 +6,7 @@
     <h1>{{ session }}</h1>
 
     <p>Formateur : {{ session.formateur.prenom ~ ' ' ~ session.formateur.nom}}</p>
-    
+    <a href="{{ path('edit_session', {'id': session.id}) }}">Ajouter stagiaires</a>
 
     <div class='modules'>
         <p>Modules de la session :</p>

@@ -52,6 +52,17 @@ class SessionRepository extends ServiceEntityRepository
     }
 
     public function findStagiaireSession(){
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
+
+        $qb->select('s')
+            ->from()
+            ->where()
+            ->setParameter('id', $session_id);
+            ->setParameter('idS', $stagiaire_id)
         
+        // renvoyer le résultat
+        $query = $qb->getQuery();
+        return $query->getResult();
     }
 }

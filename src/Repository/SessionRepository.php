@@ -14,6 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Session[]    findAll()
  * @method Session[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+
 class SessionRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -21,28 +22,32 @@ class SessionRepository extends ServiceEntityRepository
         parent::__construct($registry, Session::class);
     }
 
-//    /**
-//     * @return Session[] Returns an array of Session objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /** Afficher les stagiaires non inscrits */
+    public function findNonInscrits($session_id)
+    {
+        $em = $this->getEntityManager();
+        $sub = $em->createQueryBuilder();
 
-//    public function findOneBySomeField($value): ?Session
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $qb = $sub;
+        // sélectionner tous les stagiaires d'une session dont l'id est passé en paramètre
+        $qb->select('s')
+            ->from('App\Entity\Stagiaire', 's')
+            ->leftJoin('s.sessions', 'se')
+            ->where('se.id = :id');
+        
+        $sub = $em->createQueryBuilder();
+        // sélectionner tous les stagiaires qui ne SONT PAS (NOT IN) dans le résultat précédent
+        // on obtient donc les stagiaires non inscrits pour une session définie
+        $sub->select('st')
+            ->from('App\Entity\Stagiaire', 'st')
+            ->where($sub->expr()->notIn('st.id', $qb->getDQL()))
+            // requête paramétrée
+            ->setParameter('id', $session_id)
+            // trier la liste des stagiaires sur le nom de famille
+            ->orderBy('st.nom');
+        
+        // renvoyer le résultat
+        $query = $sub->getQuery();
+        return $query->getResult();
+    }
 }

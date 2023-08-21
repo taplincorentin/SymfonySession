@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Session;
+use App\Entity\Stagiaire;
 use App\Form\SessionType;
 use App\Form\Session2Type;
 use App\Repository\SessionRepository;
@@ -85,10 +86,14 @@ class SessionController extends AbstractController
     }
 
     #[Route('/session/{id}', name: 'show_session')]
-    public function show(Session $session): Response {
+    public function show(Session $session, EntityManagerInterface $entityManager): Response {
 
+        $id = $session->getId();
+        $nonInscrits = $entityManager->getRepository(Session::class)->findNonInscrits($id); //obtenir liste de non-inscrits
+        
         return $this->render('session/show.html.twig', [
-            'session' => $session
+            'session' => $session, 
+            'nonInscrits' => $nonInscrits,
         ]);
     }
 }

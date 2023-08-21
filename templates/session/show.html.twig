@@ -22,14 +22,15 @@
         <p>Stagiaires de la session :</p>
         {% for stagiaire in session.stagiaires %}
             <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire }}</a>
-            <a href="">désinscrire</a> <br>
+            <a href="{{ path('remove_stagiaire', {'session_id': session.id , 'stagiaire_id': stagiaire.id}) }}">désinscrire</a> <br>
         {% endfor %}
     </div>
 
     <div>
         <p>non-inscrits:</p>
         {% for stagiaire in nonInscrits %}
-            <a href="">inscrire</a> <br>
+            <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire }}</a> 
+            <a href="">inscrire</a><br>
         {% endfor %}
     </div>
 

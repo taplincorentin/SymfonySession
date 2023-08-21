@@ -50,4 +50,8 @@ class SessionRepository extends ServiceEntityRepository
         $query = $sub->getQuery();
         return $query->getResult();
     }
+
+    public function findStagiaireSession(){
+        
+    }
 }

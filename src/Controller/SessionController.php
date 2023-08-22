@@ -79,19 +79,20 @@ class SessionController extends AbstractController
 
     #[Route('/session/{id}/delete', name: 'delete_session')]
     public function delete(Session $session, EntityManagerInterface $entityManager) {
+        
         $entityManager->remove($session);
         $entityManager->flush();
 
         return $this->redirectToRoute('app_session');
     }
 
-    //remove stagiaire from a session
-    #[Route('/session/{session_id}/{stagiaire_id}/remove', name: 'remove_stagiaire')]
-    #[ParamConverter('session', options: ['mapping'=> ['id' => 'id_session']])]
-    #[ParamConverter('stagiaire', options: ['mapping'=>['idS' => 'id_stagiaire']])]
-    public function removeStagiaireFromSession(Session $session, Stagiaire $stagiaire, EntityManagerInterface $entityManager) {
 
-        dump($session);die();
+    #[Route('/session/{session_id}/{stagiaire_id}/remove', name: 'remove_stagiaire')]
+    public function removeStagiaireFromSession(Session $session_id, int $stagiaire_id, EntityManagerInterface $entityManager) {
+        
+        $session = $entityManager->getRepository(Session::class)->findOneBy(['id'=>$session_id]);
+        $stagiaire = $entityManager->getRepository(Stagiaire::class)->findOneBy(['id'=>$stagiaire_id]);
+        
         
         $session->removeStagiaire($stagiaire);
         $entityManager->persist($session);
@@ -102,14 +103,12 @@ class SessionController extends AbstractController
 
 
 
-
     //move stagiaire to a session
     #[Route('/session/{session_id}/{stagiaire_id}/move', name: 'enlist_stagiaire')]
-    #[ParamConverter('session', options: ['id' => 'session_id'])]
-    #[ParamConverter('stagiaire', options: ['idS' => 'stagiaire_id'])]
-    public function moveStagiaireToSession(Session $session, Stagiaire $stagiaire, EntityManagerInterface $entityManager) {
+    public function moveStagiaireToSession(Session $session_id, int $stagiaire_id, EntityManagerInterface $entityManager) {
 
-        dump($stagiaire); die();
+        $session = $entityManager->getRepository(Session::class)->findOneBy(['id'=>$session_id]);
+        $stagiaire = $entityManager->getRepository(Stagiaire::class)->findOneBy(['id'=>$stagiaire_id]);
         
         $session->addStagiaire($stagiaire);
         $entityManager->persist($session);
@@ -123,8 +122,7 @@ class SessionController extends AbstractController
     #[Route('/session/{id}', name: 'show_session')]
     public function show(Session $session, EntityManagerInterface $entityManager): Response {
 
-        $id = $session->getId();
-        $nonInscrits = $entityManager->getRepository(Session::class)->findNonInscrits($id); //obtenir liste de non-inscrits
+        $nonInscrits = $entityManager->getRepository(Session::class)->findNonInscrits($session->getId()); //obtenir liste de non-inscrits
         
         return $this->render('session/show.html.twig', [
             'session' => $session, 

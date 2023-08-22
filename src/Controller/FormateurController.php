@@ -40,7 +40,7 @@ class FormateurController extends AbstractController
             $entityManager->persist($formateur); //prepare
             $entityManager->flush(); //execute
 
-            return $this->redirectToRoute('app_formateur'); //redirect to formateurList
+            return $this->redirectToRoute('app_stagiaire'); //redirect to formateurList
 
         }
         return $this->render('formateur/new.html.twig', [

@@ -5,6 +5,11 @@
 {% block body %}
     <h1>{{ session }}</h1>
 
+    {% set nbInscrits = 0 %}
+    {% for stagiaire in session.stagiaires %}
+        {% set nbInscrits = nbInscrits +1 %}
+    {% endfor %}
+
     <p>Formateur : <a href="{{ path('show_formateur', {'id': session.formateur.id}) }}">{{ session.formateur }}</a></p>
 
 
@@ -22,17 +27,29 @@
 
     <div class="stagiaires">
         <p>Stagiaires de la session :</p>
-        {% for stagiaire in session.stagiaires %}
-            <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire }}</a>
-            <a href="{{ path('remove_stagiaire', {'session_id': session.id , 'stagiaire_id': stagiaire.id}) }}">désinscrire</a> <br>
-        {% endfor %}
+        {% if session.stagiaires is empty  %}
+            <p>Pas encore de stagiaire inscrit</p>
+        
+        {% else %}
+            {% for stagiaire in session.stagiaires %}
+                <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire }}</a>
+                <a href="{{ path('remove_stagiaire', {'session_id': session.id , 'stagiaire_id': stagiaire.id}) }}">désinscrire</a> <br>
+            {% endfor %}
+
+        {% endif %}
     </div>
 
     <div>
         <p>non-inscrits:</p>
         {% for stagiaire in nonInscrits %}
             <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire }}</a> 
-            <a href="{{ path('enlist_stagiaire', {'session_id': session.id , 'stagiaire_id': stagiaire.id}) }}">inscrire</a><br>
+            
+            {% if session.nbPlaces - nbInscrits > 0 %}
+                <a href="{{ path('enlist_stagiaire', {'session_id': session.id , 'stagiaire_id': stagiaire.id}) }}">inscrire</a>
+            {% endif %}
+
+            <br>
+
         {% endfor %}
     </div>
 

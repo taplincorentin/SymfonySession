@@ -50,7 +50,7 @@ class SessionController extends AbstractController
 
     }
 
-    #[Route('/stession/{id}/edit', name: 'edit_session')]
+    #[Route('/session/{id}/edit', name: 'edit_session')]
     public function new_edit(Session $session = null, Request $request, EntityManagerInterface $entityManager): Response {
         
         if(!$session) { //condition if no stagiaire create new one otherwise it's an edit of the existing one
@@ -85,18 +85,40 @@ class SessionController extends AbstractController
         return $this->redirectToRoute('app_session');
     }
 
-    #[Route('/session/{session_id}/{stagiaire_id}', name: 'remove_stagiaire')]
+    //remove stagiaire from a session
+    #[Route('/session/{session_id}/{stagiaire_id}/remove', name: 'remove_stagiaire')]
+    #[ParamConverter('session', options: ['mapping'=> ['id' => 'id_session']])]
+    #[ParamConverter('stagiaire', options: ['mapping'=>['idS' => 'id_stagiaire']])]
+    public function removeStagiaireFromSession(Session $session, Stagiaire $stagiaire, EntityManagerInterface $entityManager) {
+
+        dump($session);die();
+        
+        $session->removeStagiaire($stagiaire);
+        $entityManager->persist($session);
+        $entityManager->flush();
+        
+        return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+    }
+
+
+
+
+    //move stagiaire to a session
+    #[Route('/session/{session_id}/{stagiaire_id}/move', name: 'enlist_stagiaire')]
     #[ParamConverter('session', options: ['id' => 'session_id'])]
     #[ParamConverter('stagiaire', options: ['idS' => 'stagiaire_id'])]
-    public function removeStagiaire(Session $session, Stagiaire $Stagiaire) {
+    public function moveStagiaireToSession(Session $session, Stagiaire $stagiaire, EntityManagerInterface $entityManager) {
 
-        $id = $session->getId();
-        $idS = $stagiaire->getId();
-
-        $session->removeStagiaire($Stagiaire);
+        dump($stagiaire); die();
+        
+        $session->addStagiaire($stagiaire);
+        $entityManager->persist($session);
         $entityManager->flush();
-        return ;
+
+        return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
     }
+
+
 
     #[Route('/session/{id}', name: 'show_session')]
     public function show(Session $session, EntityManagerInterface $entityManager): Response {

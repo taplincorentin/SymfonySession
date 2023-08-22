@@ -30,7 +30,7 @@
         <p>non-inscrits:</p>
         {% for stagiaire in nonInscrits %}
             <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire }}</a> 
-            <a href="">inscrire</a><br>
+            <a href="{{ path('enlist_stagiaire', {'session_id': session.id , 'stagiaire_id': stagiaire.id}) }}">inscrire</a><br>
         {% endfor %}
     </div>
 

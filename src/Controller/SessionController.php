@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Session;
+use App\Entity\Programme;
 use App\Entity\Stagiaire;
 use App\Form\SessionType;
 use App\Form\Session2Type;
+use App\Form\ProgrammeFormType;
 use App\Repository\SessionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -124,9 +126,26 @@ class SessionController extends AbstractController
 
         $nonInscrits = $entityManager->getRepository(Session::class)->findNonInscrits($session->getId()); //obtenir liste de non-inscrits
         
+
+        $programme = new Programme();
+        $form = $this->createForm(ProgrammeFormType::class, $programme);
+        $form->handleRequest($request); 
+
+        if ($form->isSubmitted() && $form->isValid()) { //if form submitted and valid
+            
+            $programme = $form->getData();
+            $entityManager->persist($programme); //prepare
+            $entityManager->flush(); //execute
+
+            return $this->redirectToRoute('session/show.html.twig');
+
+        }
+
+
         return $this->render('session/show.html.twig', [
             'session' => $session, 
             'nonInscrits' => $nonInscrits,
+            'formAddProgramme' => $form,
         ]);
     }
 }

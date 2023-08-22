@@ -16,39 +16,11 @@ class ProgrammeController extends AbstractController
     #[Route('/programme', name: 'app_programme')]
     public function index(): Response
     {
-        return $this->render('programme/index.html.twig', [
-            'controller_name' => 'ProgrammeController',
-        ]);
-    }
-
-
-    #[Route('/programme/new', name: 'new_programme')]
-    #[Route('/programme/{id}/edit', name: 'edit_programme')]
-    public function new_edit(Programme $programme = null, Request $request, EntityManagerInterface $entityManager): Response {
-        
-        if(!$programme) { //condition if no programme create new one otherwise it's an edit of the existing one
-            $programme = new Programme();
-        }
-
-        $form = $this->createForm(ProgrammeFormType::class, $programme);
-
-        $form->handleRequest($request); 
-
-        if ($form->isSubmitted() && $form->isValid()) { //if form submitted and valid
+        return $this->render('home/index.html.twig', [
             
-            $programme = $form->getData();
-            $entityManager->persist($programme); //prepare
-            $entityManager->flush(); //execute
-
-            return $this->redirectToRoute('app_session'); //redirect to sessionList
-
-        }
-
-        return $this->render('programme/new.html.twig', [
-            'formAddProgramme' => $form,
         ]);
-
     }
+
 
     #[Route('/programme/{id}/delete', name: 'delete_programme')]
     public function delete(Programme $programme, EntityManagerInterface $entityManager) {

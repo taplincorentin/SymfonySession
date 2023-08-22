@@ -1,12 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste Stagiaires{% endblock %}
+{% block title %}Effectif{% endblock %}
 
 {% block body %}
+    
+    <h1>Liste des formateurs : </h1>
+
+    {% for formateur in formateurs %}
+        <a href="{{ path('show_formateur', {'id': formateur.id}) }}">{{ formateur }}</a>
+        <a href="{{ path('delete_formateur', {'id': formateur.id}) }}">Delete</a>
+        <a href="{{ path('edit_formateur', {'id': formateur.id}) }}">Edit</a>
+        <br>
+    {% endfor %}
+    
+    
     <h1>Liste des stagiaires : </h1>
 
     {% for stagiaire in stagiaires %}
-        {{ stagiaire }} 
+        <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire }}</a>
         <a href="{{ path('delete_stagiaire', {'id': stagiaire.id}) }}">Delete</a>
         <a href="{{ path('edit_stagiaire', {'id': stagiaire.id}) }}">Edit</a>
         <br> 

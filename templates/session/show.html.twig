@@ -5,8 +5,8 @@
 {% block body %}
     <h1>{{ session }}</h1>
 
-    <p>Formateur : {{ session.formateur.prenom ~ ' ' ~ session.formateur.nom}}</p>
-    <a href="{{ path('edit_session', {'id': session.id}) }}">Ajouter stagiaires</a>
+    <p>Formateur : <a href="{{ path('show_formateur', {'id': session.formateur.id}) }}">{{ session.formateur }}</a></p>
+
 
     <div class='modules'>
         <p>Modules de la session :</p>

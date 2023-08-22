@@ -11,19 +11,19 @@
         {% endblock %}
     </head>
     <body>
-        <a href="{{ path('app_logout') }}">Se déconnecter</a>
-        <a href="{{ path('new_stagiaire') }}">Ajout stagiaire</a>
-        <a href="{{ path('new_session') }}">Ajout session</a>
-        <a href="{{ path('new_formateur') }}">Ajout formateur</a>
-        <a href="{{ path('new_programme') }}">Ajout programme</a>
-        <a href="{{ path('app_session') }}">Voir les sessions</a>
-        <a href="{{ path('app_stagiaire') }}">Voir les stagiaires</a>
-        <a href="{{ path('app_formateur') }}">Voir les formateurs</a>
+        
+        <a href="{{ path('app_session') }}">SESSIONS</a>
+        <a href="{{ path('app_stagiaire') }}">FORMATEURS/STAGIAIRES</a>
+        <a href="{{ path('new_session') }}">+SESSION</a>
+        <a href="{{ path('new_formateur') }}">+FORMATEUR</a>
+        <a href="{{ path('new_stagiaire') }}">+STAGIAIRE</a>
          
 
         {% if is_granted("ROLE_ADMIN") %} <!-- only admin can go to registration page -->
-            <a href="{{ path('app_register') }}">Créer un nouveau compte</a>
+            <a href="{{ path('app_register') }}">NOUVEAU COMPTE</a>
         {% endif %}
+
+        <a href="{{ path('app_logout') }}">DECONNEXION</a>
 
         
 

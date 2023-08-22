@@ -3,12 +3,4 @@
 {% block title %}Liste Formateurs{% endblock %}
 
 {% block body %}
-    <h1>Liste des formateurs : </h1>
-
-    {% for formateur in formateurs %}
-    <a href="{{ path('show_formateur', {'id': formateur.id}) }}">{{ formateur }}</a>
-    <a href="{{ path('delete_formateur', {'id': formateur.id}) }}">Delete</a>
-    <a href="{{ path('edit_formateur', {'id': formateur.id}) }}">Edit</a>
-    <br>
-    {% endfor %}
 {% endblock %}

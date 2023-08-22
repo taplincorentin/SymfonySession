@@ -1,0 +1,15 @@
+/*Navbar*/
+.menu {
+    float: left;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .menu a {
+    background-color: rgb(167, 165, 74);
+    position: static;
+    display: inline;
+    padding: 8px;
+    color: black;
+  }

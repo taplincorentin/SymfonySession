@@ -21,7 +21,7 @@ class ProgrammeFormType extends AbstractType
                 'class' => Module::class
             ])
             ->add('nbJours', NumberType::class)
-            ->add('valider', SubmitType::class)
+            ->add('ajouter', SubmitType::class)
         ;
     }
 

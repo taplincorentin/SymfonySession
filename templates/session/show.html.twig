@@ -12,7 +12,7 @@
 
     <p>Formateur : <a href="{{ path('show_formateur', {'id': session.formateur.id}) }}">{{ session.formateur }}</a></p>
 
-
+    <p>Places restantes {{ session.nbPlaces - nbInscrits }}</p>
     <div class='modules'>
         <p>Modules de la session :</p>
         {% for programme in session.programmes %}
@@ -20,7 +20,7 @@
             <a href="{{ path('delete_programme', {'id': programme.id}) }}">Delete</a>
             <br>
         {% endfor %}
-        <p>Ajout module : </p>
+        <p>Ajout module au programme: </p>
 
         {{ form(formAddProgramme) }}
     </div>
@@ -31,7 +31,7 @@
             <p>Pas encore de stagiaire inscrit</p>
         
         {% else %}
-            {% for stagiaire in session.stagiaires %}
+            {% for stagiaire in session.stagiaires|sort((a, b) => a.nom <=> b.nom) %}
                 <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire }}</a>
                 <a href="{{ path('remove_stagiaire', {'session_id': session.id , 'stagiaire_id': stagiaire.id}) }}">désinscrire</a> <br>
             {% endfor %}
@@ -41,7 +41,7 @@
 
     <div>
         <p>Non-inscrits:</p>
-        {% for stagiaire in nonInscrits %}
+        {% for stagiaire in nonInscrits|sort((a, b) => a.nom <=> b.nom) %}
             <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire }}</a> 
             
             {% if session.nbPlaces - nbInscrits > 0 %}

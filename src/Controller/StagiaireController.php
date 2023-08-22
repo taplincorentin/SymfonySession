@@ -17,8 +17,8 @@ class StagiaireController extends AbstractController
     #[Route('/stagiaire', name: 'app_stagiaire')]
     public function index(StagiaireRepository $stagiaireRepository, FormateurRepository $formateurRepository): Response
     {
-        $stagiaires = $stagiaireRepository->findAll(); //get all stagiaires
-        $formateurs = $formateurRepository->findAll(); //get all formateurs
+        $stagiaires = $stagiaireRepository->findBy([], ['nom' => 'ASC']); //get all stagiaires
+        $formateurs = $formateurRepository->findBy([], ['nom' => 'ASC']); //get all formateurs
         
         return $this->render('stagiaire/index.html.twig', [
             'stagiaires' => $stagiaires,

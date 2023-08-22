@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Session;
 use App\Entity\Programme;
 use App\Form\ProgrammeFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -51,9 +52,12 @@ class ProgrammeController extends AbstractController
 
     #[Route('/programme/{id}/delete', name: 'delete_programme')]
     public function delete(Programme $programme, EntityManagerInterface $entityManager) {
+        $session = new Session;
+        $session = $programme->getSession();
+
         $entityManager->remove($programme);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_session');
+        return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
     }
 }

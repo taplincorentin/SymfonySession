@@ -17,9 +17,6 @@ class ProgrammeFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('session', EntityType::class,[
-                'class' => Session::class
-            ])
             ->add('module', EntityType::class,[
                 'class' => Module::class
             ])

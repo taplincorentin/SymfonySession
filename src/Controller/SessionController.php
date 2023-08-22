@@ -122,7 +122,7 @@ class SessionController extends AbstractController
 
 
     #[Route('/session/{id}', name: 'show_session')]
-    public function show(Session $session, EntityManagerInterface $entityManager): Response {
+    public function show(Session $session, Request $request, EntityManagerInterface $entityManager): Response {
 
         $nonInscrits = $entityManager->getRepository(Session::class)->findNonInscrits($session->getId()); //obtenir liste de non-inscrits
         
@@ -131,13 +131,15 @@ class SessionController extends AbstractController
         $form = $this->createForm(ProgrammeFormType::class, $programme);
         $form->handleRequest($request); 
 
-        if ($form->isSubmitted() && $form->isValid()) { //if form submitted and valid
+        if ($form->isSubmitted() && $form->isValid()) { 
             
             $programme = $form->getData();
+            $programme->setSession($session);
             $entityManager->persist($programme); //prepare
             $entityManager->flush(); //execute
 
-            return $this->redirectToRoute('session/show.html.twig');
+            
+            return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
 
         }
 

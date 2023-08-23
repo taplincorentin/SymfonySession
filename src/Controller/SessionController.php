@@ -8,6 +8,7 @@ use App\Entity\Programme;
 use App\Entity\Stagiaire;
 use App\Form\SessionType;
 use App\Form\ProgrammeFormType;
+use App\Repository\ModuleRepository;
 use App\Repository\SessionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -123,15 +124,30 @@ class SessionController extends AbstractController
 
 
     #[Route('/session/{id}', name: 'show_session')]
-    public function show(Session $session, Request $request, EntityManagerInterface $entityManager): Response {
+    public function show(Session $session, ModuleRepository $moduleRepository, Request $request, EntityManagerInterface $entityManager): Response {
 
-        $nonInscrits = $entityManager->getRepository(Session::class)->findNonInscrits($session->getId()); //obtenir liste de non-inscrits
+        $nonInscrits = $entityManager->getRepository(Session::class)->findNonInscrits($session->getId()); //Get list of stagiaire that aren't part of this session
         
 
-        $programme = new Programme();
-        $form = $this->createForm(ProgrammeFormType::class, $programme);
-        $form->handleRequest($request); 
+        $modules = $moduleRepository->findAll();            //get all modules
+        $sessionModules = $nonSessionModules = [];          //initialize variables to store modules that are/aren't already part of the session
+        $programmes = $session->getProgrammes();            //get programmes of this session
+        
+        foreach($programmes as $programme){                 //loop through this session's programmes
+            $sessionModules []= $programme->getModule();    //get and store each programme's module
+        }
 
+        foreach($modules as $module){                       //loop through all modules
+            if (!in_array($module, $sessionModules)){       //if module not in array of modules that are in this session 
+                $nonSessionModules []= $module;             //store module in nonSessionModules
+            }
+        }
+
+        $programme = new Programme();
+        $form = $this->createForm(ProgrammeFormType::class, $programme, array('nonSessionModules' => $nonSessionModules)); //create programme form using modules that are not in session
+        
+        $form->handleRequest($request); 
+        
         if ($form->isSubmitted() && $form->isValid()) { 
             
             $programme = $form->getData();

@@ -3,6 +3,9 @@
 {% block title %}Détail Formateur{% endblock %}
 
 {% block body %}
+
+    <a href="{{ path('edit_formateur', {'id': formateur.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+    <a href="{{ path('delete_formateur', {'id': formateur.id}) }}"><i class="fa-solid fa-trash"></i></a>
     
     <div class="formateurInfo">
         <h1>{{ formateur }}</h1>

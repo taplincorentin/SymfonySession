@@ -17,7 +17,7 @@
         <p>Modules de la session :</p>
         {% for programme in session.programmes %}
             {{ programme.module.nom ~ ' ' ~ programme.nbJours ~ ' jours' }} 
-            <a href="{{ path('delete_programme', {'id': programme.id}) }}">Delete</a>
+            <a href="{{ path('delete_programme', {'id': programme.id}) }}"><i class="fa-solid fa-trash"></i></a>
             <br>
         {% endfor %}
         <p>Ajout module au programme: </p>

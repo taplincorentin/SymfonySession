@@ -1,3 +1,8 @@
+/*ENTIRE SITE*/
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 /*NAVBAR*/
 ul {
   list-style-type: none;
@@ -56,24 +61,7 @@ li a:hover {
 
 /*Registration Form*/
 
-.reg-form {
-  overflow: hidden;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: center;
-  animation-name: left;
-  animation-duration: 1s;
-  animation-fill-mode: both;
-  animation-delay: 1s;
-  padding: 16px;
-  background-color: white;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-
-
-input[type=text], input[type=password], input[type=email] {
+input[type=text], input[type=password], input[type=email] { /*for all form inputs*/
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -84,6 +72,12 @@ input[type=text], input[type=password], input[type=email] {
 hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
+}
+
+.reg-form {
+  padding: 16px;
+  background-color: white;
+  
 }
 .btn { /* Set a style for the submit button */
   background-color: #333;

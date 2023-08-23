@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller
 
 use App\Entity\Module;
 use App\Form\ModuleType;

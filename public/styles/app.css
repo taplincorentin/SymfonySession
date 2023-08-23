@@ -59,9 +59,9 @@ li a:hover {
 }
 
 
-/*Registration Form*/
+/*Forms*/
 
-input[type=text], input[type=password], input[type=email] { /*for all form inputs*/
+input[type=text], input[type=password], input[type=email], input[type=date] { /*for all form inputs*/
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -74,10 +74,28 @@ hr {
   margin-bottom: 25px;
 }
 
-.reg-form {
-  padding: 16px;
+
+
+.form-body {
+  padding: 20px;
   background-color: white;
   
+}
+
+select {
+  width: 100%;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+}
+.inline {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.inline-element{
+  width : 45%;
 }
 .btn { /* Set a style for the submit button */
   background-color: #333;

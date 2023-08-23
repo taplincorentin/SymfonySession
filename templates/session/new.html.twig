@@ -4,6 +4,19 @@
 
 {% block body %}
     <h1>Ajouter une session : </h1>
+    
+    <div class="form-body">
+        {{ form_start(formAddSession) }}
+            
+            {{ form_row(formAddSession.titre) }}
+            {{ form_row(formAddSession.nbPlaces) }}
+            {{ form_row(formAddSession.dateDebut) }}
+            {{ form_row(formAddSession.dateFin) }}
+            {{ form_row(formAddSession.formateur) }}
+            
+            <button type="submit" class="btn">Ajouter</button>
 
-    {{ form(formAddSession) }}
+    {{ form_end(formAddSession) }}
+    </div>
+
 {% endblock %}

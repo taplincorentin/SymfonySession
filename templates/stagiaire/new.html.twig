@@ -4,6 +4,33 @@
 
 {% block body %}
     <h1>Ajouter un stagiaire : </h1>
+    <div class="form-body"
+    {{ form_start(formAddStagiaire) }}
 
-    {{ form(formAddStagiaire) }}
+        <div class="row">
+            <div class="col">
+                {{ form_row(formAddStagiaire.nom) }}
+            </div>
+            <div class="col">
+                {{ form_row(formAddStagiaire.prenom) }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                {{ form_row(formAddStagiaire.dateNaissance) }}
+            </div>
+            <div class="col">
+                {{ form_row(formAddStagiaire.sexe) }}
+            </div>
+        </div>
+
+        {{ form_row(formAddStagiaire.ville) }}
+        {{ form_row(formAddStagiaire.email) }}
+        {{ form_row(formAddStagiaire.telephone) }}
+
+        <button type="submit" class="btn">Ajouter</button>
+
+    {{ form_end(formAddStagiaire) }}
+    </div>
 {% endblock %}

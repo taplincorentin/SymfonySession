@@ -56,11 +56,22 @@ li a:hover {
 
 /*Registration Form*/
 
-.form {
+.reg-form {
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  animation-name: left;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-delay: 1s;
   padding: 16px;
   background-color: white;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
 
 input[type=text], input[type=password], input[type=email] {
   width: 100%;

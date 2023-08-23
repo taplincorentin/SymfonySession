@@ -18,7 +18,8 @@ class ProgrammeFormType extends AbstractType
     {
         $builder
             ->add('module', EntityType::class,[
-                'class' => Module::class
+                'class' => Module::class,
+                'choices' => $options['nonSessionModules']
             ])
             ->add('nbJours', NumberType::class)
             ->add('ajouter', SubmitType::class)
@@ -29,6 +30,7 @@ class ProgrammeFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Programme::class,
+            'nonSessionModules' => 0,
         ]);
     }
 }

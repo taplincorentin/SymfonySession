@@ -51,20 +51,4 @@ class SessionRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    /*public function findPastSessions($sessions) { 
-        
-        $currentDate = new DateTime();
-
-        $em = $this->getEntityManager();
-        $qb = $em->createQueryBuilder();
-
-        $qb->select('s')
-            ->from('App\Entity\Session', 's')
-            ->where('s.date_fin < :currentDate')
-            ->setParameter('currentDate', $currentDate);
-            
-        $query->getQuery();
-        
-        return $query->getResult();
-    }*/
 }

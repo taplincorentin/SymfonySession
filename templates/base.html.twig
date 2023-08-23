@@ -6,6 +6,7 @@
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {% block stylesheets %}
         <link rel="stylesheet" href="/styles/app.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
         {% endblock %}
 
         {% block javascripts %}
@@ -13,21 +14,24 @@
     </head>
     <body>
         <div class="menu">
-            <a href="{{ path('app_session') }}">SESSIONS</a>
-            <a href="{{ path('app_stagiaire') }}">FORMATEURS/STAGIAIRES</a>
-            <a href="{{ path('new_session') }}">+SESSION</a>
-            <a href="{{ path('new_formateur') }}">+FORMATEUR</a>
-            <a href="{{ path('new_stagiaire') }}">+STAGIAIRE</a>
-            <a href="{{ path('new_module') }}">+MODULE</a>
-        
-         
-
+            <ul>
+                <li><a href="{{ path('app_session') }}">SESSIONS</a></li>
+                <li><a href="{{ path('app_stagiaire') }}">FORMATEURS/STAGIAIRES</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">+AJOUTER</a>
+                    <div class="dropdown-elements">
+                        <a href="{{ path('new_session') }}">SESSION</a>
+                        <a href="{{ path('new_formateur') }}">FORMATEUR</a>
+                        <a href="{{ path('new_stagiaire') }}">STAGIAIRE</a>
+                        <a href="{{ path('new_module') }}">MODULE</a>
+                    </div>
+                </li>
+                <li style="float:right"><a href="{{ path('app_logout') }}"><i class="fa-solid fa-right-from-bracket fa-lg"></i></a></li>
             {% if is_granted("ROLE_ADMIN") %} <!-- only admin can go to registration page -->
-                <a href="{{ path('app_register') }}">NOUVEAU COMPTE</a>
+                <li style="float:right"><a href="{{ path('app_register') }}"><i class="fa-solid fa-user-plus fa-lg"></i></a></li>
             {% endif %}
-
-            <a href="{{ path('app_logout') }}">DECONNEXION</a>
-
+                
+            </ul>
         </div>
 
         {% block body %}{% endblock %}

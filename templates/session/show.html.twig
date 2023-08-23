@@ -4,7 +4,8 @@
 
 {% block body %}
     <h1>{{ session }}</h1>
-
+    <a href="{{ path('delete_session', {'id': session.id}) }}"><i class="fa-solid fa-trash"></i></a>
+    
     {% set nbInscrits = 0 %}
     {% for stagiaire in session.stagiaires %}
         {% set nbInscrits = nbInscrits +1 %}

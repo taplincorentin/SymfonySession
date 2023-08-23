@@ -51,7 +51,7 @@ class SessionRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    public function findPastSessions($sessions) { 
+    /*public function findPastSessions($sessions) { 
         
         $currentDate = new DateTime();
 
@@ -66,5 +66,5 @@ class SessionRepository extends ServiceEntityRepository
         $query->getQuery();
         
         return $query->getResult();
-    }
+    }*/
 }

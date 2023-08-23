@@ -3,8 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Session;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Session>
@@ -48,6 +48,23 @@ class SessionRepository extends ServiceEntityRepository
         
         // renvoyer le résultat
         $query = $sub->getQuery();
+        return $query->getResult();
+    }
+
+    public function findPastSessions($sessions) { 
+        
+        $currentDate = new DateTime();
+
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
+
+        $qb->select('s')
+            ->from('App\Entity\Session', 's')
+            ->where('s.date_fin < :currentDate')
+            ->setParameter('currentDate', $currentDate);
+            
+        $query->getQuery();
+        
         return $query->getResult();
     }
 }

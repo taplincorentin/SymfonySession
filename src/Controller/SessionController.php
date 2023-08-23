@@ -6,7 +6,6 @@ use App\Entity\Session;
 use App\Entity\Programme;
 use App\Entity\Stagiaire;
 use App\Form\SessionType;
-use App\Form\Session2Type;
 use App\Form\ProgrammeFormType;
 use App\Repository\SessionRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,12 +17,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class SessionController extends AbstractController
 {
     #[Route('/session', name: 'app_session')]
-    public function index(SessionRepository $sessionRepository): Response
+    public function index(SessionRepository $sessionRepository, EntityManagerInterface $entityManager): Response
     {
         $sessions = $sessionRepository->findBy([], ["dateDebut" => "ASC"]); //get all sessions sorted from startDate
-
+        dd($sessions);
+        $pastSessions = $sessions->findPastSessions();
+        //$currentSessions = $sessions->findCurrentSessions(); 
+        //$futureSessions = $sessions->findFutureSessions();
+        
+        
         return $this->render('session/index.html.twig', [
-            'sessions' => $sessions
+            'sessions' => $sessions,
+            'currentSessions' => $currentSessions,
+            'pastSessions' => $pastSessions,
+            'futureSessions' => $futureSessions
         ]);
     }
 
@@ -64,10 +71,10 @@ class SessionController extends AbstractController
 
 
     #[Route('/session/{session_id}/{stagiaire_id}/remove', name: 'remove_stagiaire')]
-    public function removeStagiaireFromSession(Session $session_id, int $stagiaire_id, EntityManagerInterface $entityManager) {
-        
-        $session = $entityManager->getRepository(Session::class)->findOneBy(['id'=>$session_id]);
-        $stagiaire = $entityManager->getRepository(Stagiaire::class)->findOneBy(['id'=>$stagiaire_id]);
+    public function removeStagiaireFromSession(Session $session_id, Stagiaire $stagiaire_id, EntityManagerInterface $entityManager) {
+   
+        $session = $session_id;
+        $stagiaire = $stagiaire_id;
         
         
         $session->removeStagiaire($stagiaire);

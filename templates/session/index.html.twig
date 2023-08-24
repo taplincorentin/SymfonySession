@@ -3,57 +3,80 @@
 {% block title %}Sessions{% endblock %}
 
 {% block body %}
-    <h1>Prochaines sessions : </h1>
+    <div class="sessions">
+        
+        <h1>Prochaines sessions : </h1>
+        <div class="future-sessions">
 
-    {% for session in futureSessions %}
-        <div> 
-            {% set count = 0 %}
-            {% for stagiaire in session.stagiaires %}
-                {% set count = count +1 %}
+            {% for session in futureSessions %}
+                <div class="session-box"> 
+                
+                    {% set count = 0 %}
+                    {% for stagiaire in session.stagiaires %}                       <!--count number of stagiaires in session-->
+                        {% set count = count +1 %}
+                    {% endfor %}
+                    {% set placesRestantes = session.nbPlaces - count %}            <!--get number of places left in session-->
+
+                    <div class='session-title'>
+                        <p><a href="{{ path('show_session', {'id': session.id}) }}">{{ session.titre }}</a></p>
+                    </div>
+                    <div class='session-dates'>
+                        <p>{{session.dateDebut | date('d-m-Y') ~ ' ' ~ session.dateFin | date('d-m-Y')}}</p>
+                    </div>
+                    <div class='session-places'>
+                        <p>{{ placesRestantes }} places restantes</p>
+                    </div>
+            
+                </div>
+    
+            {% endfor %}
+        </div>
+
+        <h1>Sessions en cours : </h1>
+        <div class="current-sessions">
+
+            {% for session in currentSessions %}            
+                <div class="session-box"> 
+                
+                    {% set count = 0 %}
+                    {% for stagiaire in session.stagiaires %}
+                        {% set count = count +1 %}
+                    {% endfor %}
+                    {% set placesRestantes = session.nbPlaces - count %}
+
+                    <div class='session-title'>
+                        <p><a href="{{ path('show_session', {'id': session.id}) }}">{{ session.titre }}</a></p>
+                    </div>
+                    <div class='session-dates'>
+                        <p>{{session.dateDebut | date('d-m-Y') ~ ' ' ~ session.dateFin | date('d-m-Y')}}</p>
+                    </div>
+                    <div class='session-places'>
+                        <p>{{ placesRestantes }} places restantes</p>
+                    </div>
+
+                </div>
+            
             {% endfor %}
 
-            {% set placesRestantes = session.nbPlaces - count %}
-            <p><a href="{{ path('show_session', {'id': session.id}) }}">{{ session.titre }}</a></p>
-            <p>{{session.dateDebut | date('d-m-Y') ~ ' ' ~ session.dateFin | date('d-m-Y')}}</p>
-            <p>{{ placesRestantes }} places restantes</p>
-            
-            <br>
-            
         </div>
-    {% endfor %}
 
-    <h1>Sessions en cours : </h1>
+        <h1>Sessions passées: </h1>
+        <div class="past-sessions">
+            
+            {% for session in pastSessions %}
+                <div class="session-box">
+                    <div class='session-title'>
+                        <p><a href="{{ path('show_session', {'id': session.id}) }}">{{ session.titre }}</a></p>
+                    </div>
+                    <div class='session-dates'>
+                        <p>{{session.dateDebut | date('d-m-Y') ~ ' ' ~ session.dateFin | date('d-m-Y')}}</p>
+                    </div>
+                </div>
 
-    {% for session in currentSessions %}
-        <div> 
-            {% set count = 0 %}
-            {% for stagiaire in session.stagiaires %}
-                {% set count = count +1 %}
             {% endfor %}
 
-            {% set placesRestantes = session.nbPlaces - count %}
-            <p><a href="{{ path('show_session', {'id': session.id}) }}">{{ session.titre }}</a></p>
-            <p>{{session.dateDebut | date('d-m-Y') ~ ' ' ~ session.dateFin | date('d-m-Y')}}</p>
-            <p>{{ placesRestantes }} places restantes</p>
-            
-            <br>
-            
         </div>
-    {% endfor %}
-
-    <h1>Sessions passées: </h1>
-
-    {% for session in pastSessions %}
-        <div> 
-            
-            <p><a href="{{ path('show_session', {'id': session.id}) }}">{{ session.titre }}</a></p>
-            <p>{{session.dateDebut | date('d-m-Y') ~ ' ' ~ session.dateFin | date('d-m-Y')}}</p>
-
-            
-            <br>
-            
-        </div>
-    {% endfor %}
-
+    
+    </div>
 
 {% endblock %}

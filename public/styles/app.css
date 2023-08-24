@@ -1,6 +1,12 @@
 /*ENTIRE SITE*/
 * {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Raleway', sans-serif;
+  
+}
+
+a{
+  text-decoration: none;
+  color: black;
 }
 
 /*NAVBAR*/
@@ -106,7 +112,7 @@ select {
 }
 
 .btn { /* Set a style for the submit button */
-  background-color: #333;
+  background-color: #75858e;
   color: white;
   cursor: pointer;
   opacity: 0.9;
@@ -130,10 +136,7 @@ select {
   width: 50%;
 }
 
-.stagiaires a {
-
-}
-table 			      { 
+table { 
   text-align: center;
   border-spacing: 1; 
   border-collapse: collapse; 
@@ -152,7 +155,9 @@ table a {
   display: block;
 }
   
-td,th { padding-left:8px}
+td,th {
+  padding-left:8px;
+}
 
 
 tbody tr:hover {
@@ -168,4 +173,27 @@ tbody tr { height:48px; border-bottom:1px solid #E3F1D5 ;
   &:last-child  { border:0; }
 }
   
+/*SESSION LIST*/
+.sessions {
+  display: flex;
+  flex-direction: column;
+}
 
+.future-sessions, .current-sessions, .past-sessions{
+  display: flex;
+  gap: 10px;
+  
+}
+
+.session-box{
+  border: solid black 1px;
+  width: 33%;
+  text-align: center;
+  background-color: #ecf3da;
+}
+
+.session-title {
+  font-size: 1.2em;
+  text-decoration: underline;
+  font-weight: bolder;
+}

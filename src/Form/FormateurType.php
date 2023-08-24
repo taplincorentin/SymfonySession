@@ -14,9 +14,9 @@ class FormateurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', TextType::class)
-            ->add('prenom', TextType::class)
-            ->add('email', TextType::class)
+            ->add('nom', TextType::class, ['label' => 'Nom de famille :'])
+            ->add('prenom', TextType::class, ['label' => 'Prénom :'])
+            ->add('email', TextType::class, ['label' => 'Adresse e-mail :'])
         ;
     }
 

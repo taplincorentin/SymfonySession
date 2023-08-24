@@ -15,15 +15,16 @@ class StagiaireType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', TextType::class)
-            ->add('prenom', TextType::class)
-            ->add('sexe', TextType::class)
+            ->add('nom', TextType::class, ['label' => 'Nom de famille :'])
+            ->add('prenom', TextType::class, ['label' => 'Prénom :'])
+            ->add('sexe', TextType::class, ['label' => 'Sexe (F/M/A) :'])
             ->add('dateNaissance', DateType::class, [
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'label' => 'Date de naissance :'
             ])
-            ->add('ville',TextType::class)
-            ->add('email', TextType::class)
-            ->add('telephone', TextType::class)
+            ->add('ville',TextType::class, ['label' => 'Lieu de domiciliation :'])
+            ->add('email', TextType::class, ['label' => 'Adresse e-mail  :'])
+            ->add('telephone', TextType::class, ['label' => 'Numéro de téléphone :'])
 
         ;
     }

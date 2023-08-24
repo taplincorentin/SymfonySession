@@ -36,8 +36,7 @@ class StagiaireController extends AbstractController
 
         $form = $this->createForm(StagiaireType::class, $stagiaire);
 
-        $form->handleRequest($request); 
-
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) { //if form submitted and valid
             
             $stagiaire = $form->getData();

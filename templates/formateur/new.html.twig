@@ -5,5 +5,16 @@
 {% block body %}
     <h1>Ajouter un formateur : </h1>
 
-    {{ form(formAddFormateur) }}
+    <div class="form-body">
+        {{ form_start(formAddProgramme) }}
+            
+            {{ form_row(formAddProgramme.nom) }}
+            {{ form_row(formAddProgramme.prenom) }}
+            {{ form_row(formAddProgramme.email) }}
+            
+            <div class="btn-container">
+                <button type="submit" class="btn">Ajouter le formateur</button>
+            </div>
+
+    {{ form_end(formAddProgramme) }}
 {% endblock %}

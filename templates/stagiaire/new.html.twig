@@ -3,34 +3,30 @@
 {% block title %}Ajout stagiaire{% endblock %}
 
 {% block body %}
-    <h1>Ajouter un stagiaire : </h1>
-    <div class="form-body"
-    {{ form_start(formAddStagiaire) }}
 
-        <div class="row">
-            <div class="col">
-                {{ form_row(formAddStagiaire.nom) }}
+    <div class="form-body">
+    
+        <h1>Ajouter un stagiaire : </h1>
+        <p>Remplissez le formulaire pour ajouter un nouveau stagiaire du centre de formation</p>
+
+        <hr>
+
+        {{ form_start(formAddStagiaire) }}
+
+            {{ form_row(formAddStagiaire.nom) }}
+            {{ form_row(formAddStagiaire.prenom) }}
+            {{ form_row(formAddStagiaire.dateNaissance) }}
+            {{ form_row(formAddStagiaire.sexe) }}
+            {{ form_row(formAddStagiaire.ville) }}
+            {{ form_row(formAddStagiaire.email) }}
+            {{ form_row(formAddStagiaire.telephone) }}
+
+            <hr>
+
+            <div class="btn-container">
+                <button type="submit" class="btn">Ajouter le stagiaire</button>
             </div>
-            <div class="col">
-                {{ form_row(formAddStagiaire.prenom) }}
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                {{ form_row(formAddStagiaire.dateNaissance) }}
-            </div>
-            <div class="col">
-                {{ form_row(formAddStagiaire.sexe) }}
-            </div>
-        </div>
-
-        {{ form_row(formAddStagiaire.ville) }}
-        {{ form_row(formAddStagiaire.email) }}
-        {{ form_row(formAddStagiaire.telephone) }}
-
-        <button type="submit" class="btn">Ajouter</button>
-
-    {{ form_end(formAddStagiaire) }}
+        {{ form_end(formAddStagiaire) }}
     </div>
+
 {% endblock %}

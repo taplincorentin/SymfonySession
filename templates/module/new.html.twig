@@ -5,5 +5,14 @@
 {% block body %}
     <h1>Ajouter un module : </h1>
 
-    {{ form(formAddModule) }}
+    <div class="form-body">
+        {{ form_start(formAddModule) }}
+            
+            {{ form_row(formAddModule.nom) }}
+            
+            <div class="btn-container">
+                <button type="submit" class="btn">Ajouter le module</button>
+            </div>
+
+    {{ form_end(formAddModule) }}
 {% endblock %}

@@ -60,9 +60,8 @@ li a:hover {
 
 
 /*Forms*/
-
-input[type=text], input[type=password], input[type=email], input[type=date] { /*for all form inputs*/
-  width: 100%;
+input[type=text], input[type=password], input[type=email], input[type=date], .btn { /*for all form inputs*/
+  width: 95%;
   padding: 15px;
   margin: 5px 0 22px 0;
   display: inline-block;
@@ -72,6 +71,7 @@ input[type=text], input[type=password], input[type=email], input[type=date] { /*
 hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
+  width: 95%;
 }
 
 
@@ -79,7 +79,16 @@ hr {
 .form-body {
   padding: 20px;
   background-color: white;
-  
+  width : 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 select {
@@ -89,22 +98,11 @@ select {
   border-radius: 4px;
   background-color: #f1f1f1;
 }
-.inline {
-  display: flex;
-  justify-content: space-evenly;
-}
 
-.inline-element{
-  width : 45%;
-}
 .btn { /* Set a style for the submit button */
   background-color: #333;
   color: white;
-  padding: 16px 20px;
-  margin: 8px 0;
-  border: none;
   cursor: pointer;
-  width: 100%;
   opacity: 0.9;
 }
 

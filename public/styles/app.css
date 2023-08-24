@@ -9,7 +9,7 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  background-color: #75858e;
 }
 
 li {
@@ -118,7 +118,23 @@ select {
 }
 
 /*Formateurs/Stagiaires list*/
+.effectif {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.formateurs {
+  width: 50%;
+}
+.stagiaires {
+  width: 50%;
+}
+
+.stagiaires a {
+
+}
 table 			      { 
+  text-align: center;
   border-spacing: 1; 
   border-collapse: collapse; 
   background:white;
@@ -129,12 +145,22 @@ table 			      {
   margin:0 auto;
   position:relative;
 }
+
+table a {
+  text-decoration: none;
+  color: black;
+  display: block;
+}
   
 td,th { padding-left:8px}
 
+
+tbody tr:hover {
+  background-color: #ecf3da;
+}
 thead tr { 
   height:60px;
-  background:#FFED86;
+  background:#ecf3da;
   font-size:16px;
 }
   

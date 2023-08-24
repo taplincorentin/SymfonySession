@@ -4,11 +4,29 @@
 
 {% block body %}
     <div class="effectif">
+        
+        <div class="stagiaires">
+            <table>
+                <thead>
+                    <tr>
+                        <th>STAGIAIRES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stagiaire in stagiaires %}
+                        <tr>
+                            <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire }}</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
         <div class="formateurs">
             <table>
                 <thead>
                     <tr>
-                        <th>Formateurs</th>
+                        <th>FORMATEURS</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,21 +39,6 @@
             </table>
         </div>
     
-        <div class="stagiaires">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Stagiaires</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for stagiaire in stagiaires %}
-                        <tr>
-                            <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire }}</a></td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+        
     </div>
 {% endblock %}

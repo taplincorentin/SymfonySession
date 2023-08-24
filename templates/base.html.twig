@@ -18,12 +18,12 @@
                 <li><a href="{{ path('app_session') }}">SESSIONS</a></li>
                 <li><a href="{{ path('app_stagiaire') }}">FORMATEURS/STAGIAIRES</a></li>
                 <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn">+CREER</a>
+                    <a href="javascript:void(0)" class="dropbtn"><i class="fa-solid fa-plus fa-lg"></i></a>
                     <div class="dropdown-elements">
-                        <a href="{{ path('new_session') }}">SESSION</a>
-                        <a href="{{ path('new_formateur') }}">FORMATEUR</a>
-                        <a href="{{ path('new_stagiaire') }}">STAGIAIRE</a>
-                        <a href="{{ path('new_module') }}">MODULE</a>
+                        <a href="{{ path('new_session') }}">+SESSION</a>
+                        <a href="{{ path('new_formateur') }}">+FORMATEUR</a>
+                        <a href="{{ path('new_stagiaire') }}">+STAGIAIRE</a>
+                        <a href="{{ path('new_module') }}">+MODULE</a>
                     </div>
                 </li>
                 <li style="float:right"><a href="{{ path('app_logout') }}"><i class="fa-solid fa-right-from-bracket fa-lg"></i></a></li>

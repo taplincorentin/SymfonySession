@@ -3,22 +3,33 @@
 {% block title %}Ajout session{% endblock %}
 
 {% block body %}
-    <h1>Ajouter une session : </h1>
-    
+
     <div class="form-body">
+
+        <h1>Ajouter une session : </h1>
+        <p>Remplissez le formulaire pour ajouter une nouvelle session</p>
+
+        <hr>
+
+    
         {{ form_start(formAddSession) }}
             
             {{ form_row(formAddSession.titre) }}
             {{ form_row(formAddSession.nbPlaces) }}
             {{ form_row(formAddSession.dateDebut) }}
             {{ form_row(formAddSession.dateFin) }}
-            {{ form_row(formAddSession.formateur) }}
+            <div class="select-container">
+                {{ form_row(formAddSession.formateur, {'attr': {'class': 'selector'}}) }}
+            </div>
+
+            <hr>
             
             <div class="btn-container">
                 <button type="submit" class="btn">Ajouter la session</button>
             </div>
 
     {{ form_end(formAddSession) }}
+
     </div>
 
 {% endblock %}

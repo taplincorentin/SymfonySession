@@ -54,7 +54,7 @@ class FormateurController extends AbstractController
         $entityManager->remove($formateur);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_formateur');
+        return $this->redirectToRoute('app_stagiaire');
     }
 
     #[Route('/formateur/{id}', name: 'show_formateur')]

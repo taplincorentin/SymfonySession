@@ -14,8 +14,7 @@ class ModuleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('nom', TextType::class)
-        ->add('valider', SubmitType::class)
+        ->add('nom', TextType::class, ['label' => 'Nom du module'])
         ;
     }
 

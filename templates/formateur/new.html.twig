@@ -3,18 +3,24 @@
 {% block title %}Ajout formateur{% endblock %}
 
 {% block body %}
-    <h1>Ajouter un formateur : </h1>
-
     <div class="form-body">
-        {{ form_start(formAddProgramme) }}
+        <h1>Ajouter un formateur : </h1>
+        <p>Remplissez le formulaire pour ajouter un nouveau formateur</p>
+    
+        <hr>
+
+        {{ form_start(formAddFormateur) }}
             
-            {{ form_row(formAddProgramme.nom) }}
-            {{ form_row(formAddProgramme.prenom) }}
-            {{ form_row(formAddProgramme.email) }}
+            {{ form_row(formAddFormateur.nom) }}
+            {{ form_row(formAddFormateur.prenom) }}
+            {{ form_row(formAddFormateur.email) }}
+
+            <hr>
             
             <div class="btn-container">
                 <button type="submit" class="btn">Ajouter le formateur</button>
             </div>
 
-    {{ form_end(formAddProgramme) }}
+        {{ form_end(formAddFormateur) }}
+    </div>
 {% endblock %}

@@ -72,7 +72,7 @@ input[type=text], input[type=password], input[type=email], input[type=date], .bt
 hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
-  width: 95%;
+  width: 99%;
 }
 
 
@@ -110,11 +110,36 @@ select {
   color: white;
   cursor: pointer;
   opacity: 0.9;
+  width: 100%;
 }
-
-
 
 .btn:hover {
   opacity: 1;
 }
+
+/*Formateurs/Stagiaires list*/
+table 			      { 
+  border-spacing: 1; 
+  border-collapse: collapse; 
+  background:white;
+  border-radius:6px;
+  overflow:hidden;
+  max-width:800px; 
+  width:100%;
+  margin:0 auto;
+  position:relative;
+}
+  
+td,th { padding-left:8px}
+
+thead tr { 
+  height:60px;
+  background:#FFED86;
+  font-size:16px;
+}
+  
+tbody tr { height:48px; border-bottom:1px solid #E3F1D5 ;
+  &:last-child  { border:0; }
+}
+  
 

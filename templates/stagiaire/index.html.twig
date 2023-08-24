@@ -3,21 +3,39 @@
 {% block title %}Effectif{% endblock %}
 
 {% block body %}
+    <div class="effectif">
+        <div class="formateurs">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Formateurs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for formateur in formateurs %}
+                        <tr>
+                            <td><a href="{{ path('show_formateur', {'id': formateur.id}) }}">{{ formateur }}</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     
-    <h1>Liste des formateurs : </h1>
-
-    {% for formateur in formateurs %}
-        <a href="{{ path('show_formateur', {'id': formateur.id}) }}">{{ formateur }}</a>
-        
-        <br>
-    {% endfor %}
-    
-    
-    <h1>Liste des stagiaires : </h1>
-
-    {% for stagiaire in stagiaires %}
-        <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire }}</a>
-        
-        <br> 
-    {% endfor %}
+        <div class="stagiaires">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Stagiaires</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stagiaire in stagiaires %}
+                        <tr>
+                            <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire }}</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}

@@ -3,16 +3,23 @@
 {% block title %}Ajout module{% endblock %}
 
 {% block body %}
-    <h1>Ajouter un module : </h1>
-
     <div class="form-body">
+    
+        <h1>Ajouter un module : </h1>
+        <p>Remplissez le nom du module pour en créer un nouveau</p>
+        
+        <hr>
+
         {{ form_start(formAddModule) }}
             
             {{ form_row(formAddModule.nom) }}
+
+            <hr>
             
             <div class="btn-container">
                 <button type="submit" class="btn">Ajouter le module</button>
             </div>
 
     {{ form_end(formAddModule) }}
+    </div>
 {% endblock %}

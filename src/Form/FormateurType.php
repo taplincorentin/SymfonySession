@@ -17,7 +17,6 @@ class FormateurType extends AbstractType
             ->add('nom', TextType::class)
             ->add('prenom', TextType::class)
             ->add('email', TextType::class)
-            ->add('valider', SubmitType::class)
         ;
     }
 

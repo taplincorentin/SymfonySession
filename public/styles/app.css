@@ -44,7 +44,7 @@ a{
 .dropdown-elements {
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
+  background-color: #75858e;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -207,17 +207,83 @@ select {
   width: 100%;
 }
 
+.delete-session {
+  text-decoration: underline;
+}
 
+.session-formateur{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.stagiaires-in, .stagiaires-out, .modules, .ajout-module {
+  width: 50%;
+}
+
+.stagiaires-in { order: 1; }
+.stagiaires-out { order: 3; }
+.modules { order: 2; }
+.ajout-module { order: 4; }
 
 .session-page{
   display: flex;
-  gap : 10px;
+  flex-wrap: wrap;
+  text-align: center;
 }
 
-.session-participants{
-  width: 50%;
+
+.session-page table { 
+  text-align: center;
+  border-spacing: 1; 
+  border-collapse: collapse; 
+  background:white;
+  border-radius:6px;
+  overflow:hidden;
+  max-width:800px; 
+  width:100%;
+  margin:0 auto;
+  position:relative;
 }
 
-.session-modules{
-  width: 50%;
+.session-page table a {
+  text-decoration: none;
+  color: black;
+  display: block;
+}
+  
+.session-page td,th {
+  padding-left:8px;
+}
+
+
+.stagiaires-in tbody tr:hover {
+  background-color: #ecf3da;
+}
+
+.stagiaires-out tbody tr:hover {
+  background-color: #ecf3da;
+}
+
+.session-page thead tr { 
+  height:60px;
+  background:#ecf3da;
+  font-size:16px;
+}
+  
+.session-page tbody tr { height:48px; border-bottom:1px solid #E3F1D5 ;
+  &:last-child  { border:0; }
+}
+
+
+.pgr-btn { /* Set a style for the programme submit button */
+  background-color: #75858e;
+  color: white;
+  cursor: pointer;
+  opacity: 0.9;
+  width: 35%;
+}
+
+.pgr-btn:hover {
+  opacity: 1;
 }

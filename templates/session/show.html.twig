@@ -5,78 +5,89 @@
 {% block body %}
     <div class='session-name'>
         <h1>{{ session }}</h1>
-        <a href="{{ path('delete_session', {'id': session.id}) }}">supprimer la session <i class="fa-solid fa-trash fa-lg"></i></a>
+        <a class='delete-session' href="{{ path('delete_session', {'id': session.id}) }}">supprimer la session <i class="fa-solid fa-trash fa-lg"></i></a>
+        
+    </div>
+    <div class="session-formateur">
+        <p>Formateur : <a href="{{ path('show_formateur', {'id': session.formateur.id}) }}">{{ session.formateur }}</a></p>
+        
+        {% set nbInscrits = 0 %}
+        {% for stagiaire in session.stagiaires %}
+            {% set nbInscrits = nbInscrits +1 %}
+        {% endfor %}
+
+        <p>Places restantes : {{ session.nbPlaces - nbInscrits }}</p>
     </div>
 
     <div class="session-page">    
         
-        <div class='session-participants'>
-            
-            
-    
-            {% set nbInscrits = 0 %}
-            {% for stagiaire in session.stagiaires %}
-                {% set nbInscrits = nbInscrits +1 %}
-            {% endfor %}
-
-            <p>Formateur : <a href="{{ path('show_formateur', {'id': session.formateur.id}) }}">{{ session.formateur }}</a></p>
-
-            <p>Places restantes : {{ session.nbPlaces - nbInscrits }}</p>
-        
-
             <div class="stagiaires-in">
-                <p>Stagiaires inscrits à la session :</p>
 
                 {% if session.stagiaires is empty  %}
                     <p>Pas encore de stagiaire inscrit</p>
         
                 {% else %}
-                    <ul>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STAGIAIRES INSCRITS</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         {% for stagiaire in session.stagiaires|sort((a, b) => a.nom <=> b.nom) %}
-                            <li>
-                                <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire }}</a>
-                                <a href="{{ path('remove_stagiaire', {'session_id': session.id , 'stagiaire_id': stagiaire.id}) }}"><i class="fa-regular fa-square-minus"></i></a> <br>
-                            </li>  
+                            <tr>
+                                <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire }}</a></td>
+                                <td><a href="{{ path('remove_stagiaire', {'session_id': session.id , 'stagiaire_id': stagiaire.id}) }}"><i class="fa-regular fa-square-minus"></i></a></td>
+                            </tr>  
                         {% endfor %}
-                    </ul>
+                    </tbody>
+                </table>
                 {% endif %}
             </div>
 
             <div class="stagiaires-out">
-                <p>Stagiaires non-inscrits à la session :</p>
-                <ul>
-                    {% for stagiaire in nonInscrits|sort((a, b) => a.nom <=> b.nom) %}
                 
-                        <li>
-                            <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire }}</a>
-            
-                            {% if session.nbPlaces - nbInscrits > 0 %}
-                                <a href="{{ path('enlist_stagiaire', {'session_id': session.id , 'stagiaire_id': stagiaire.id}) }}"><i class="fa-regular fa-square-plus"></i></a>
-                            {% endif %}
-                        </li>
-
-                    {% endfor %}
-                </ul>
-        
-            </div>
-        </div>
-
-        <div class="session-modules">
-            <div class='modules'>
-                <p>Modules de la session :</p>
                 <table>
                     <thead>
                         <tr>
-                            <th>module</th>
-                            <th>nombre de jours</th>
-                            <th></th>
+                            <th>STAGIAIRES NON-INSCRITS</th>
+                            {% if session.nbPlaces - nbInscrits > 0 %}
+                                <th></th>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for stagiaire in nonInscrits|sort((a, b) => a.nom <=> b.nom) %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire }}</a>
+                                </td>
+                                <td>
+                                {% if session.nbPlaces - nbInscrits > 0 %}
+                                    <a href="{{ path('enlist_stagiaire', {'session_id': session.id , 'stagiaire_id': stagiaire.id}) }}"><i class="fa-regular fa-square-plus"></i></a>
+                                {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+        
+            </div>
+
+        
+            <div class='modules'>
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="3">MODULES DE LA SESSION</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for programme in session.programmes %}
                             <tr>
                                 <td>{{ programme.module.nom }}</td>
-                                <td>{{ programme.nbJours }}</td>
+                                <td>{{ programme.nbJours }} jours</td>
                                 <td><a href="{{ path('delete_programme', {'id': programme.id}) }}"><i class="fa-solid fa-trash"></i></a></td>
                             </tr>
                         {% endfor %}
@@ -85,11 +96,20 @@
             </div>
         
             <div class="ajout-module">
-                <p>Ajout module au programme: </p>
+                <table><thead><th>AJOUT D'UN MODULE A LA SESSION</th></thead></table>
+                
 
-                {{ form(formAddProgramme) }}
+                {{ form_start(formAddProgramme) }}
+            
+                    {{ form_row(formAddProgramme.module) }}
+                    {{ form_row(formAddProgramme.nbJours) }}
+            
+                    <div class="btn-container">
+                        <button type="submit" class="pgr-btn">AJOUTER AU PROGRAMME</button>
+                    </div>
+
+                {{ form_end(formAddProgramme) }}
             </div>
-        </div>
     </div>
 
 

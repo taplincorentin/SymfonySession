@@ -19,11 +19,13 @@ class ProgrammeFormType extends AbstractType
         $builder
             ->add('module', EntityType::class,[
                 'class' => Module::class,
-                'choices' => $options['nonSessionModules']
+                'choices' => $options['nonSessionModules'],
+                'label' => ' '
             ])
-            ->add('nbJours', NumberType::class)
-            ->add('ajouter', SubmitType::class)
-        ;
+            ->add('nbJours', NumberType::class, [
+                'label' => 'Nombre de jours : '
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void

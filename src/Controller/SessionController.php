@@ -130,7 +130,10 @@ class SessionController extends AbstractController
 
         $nonInscrits = $entityManager->getRepository(Session::class)->findNonInscrits($session->getId()); //Get list of stagiaire that aren't part of this session
         
+        $nonProgramme = $entityManager->getRepository(Session::class)->findNonProgramme($session->getId()); //Get list of modules that aren't part of this session
 
+        dd($nonProgramme);
+        
         $modules = $moduleRepository->findAll();            //get all modules
         $sessionModules = $nonSessionModules = [];          //initialize variables to store modules that are/aren't already part of the session
         $programmes = $session->getProgrammes();            //get programmes of this session

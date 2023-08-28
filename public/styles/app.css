@@ -289,6 +289,7 @@ select {
 /*STAGIAIRE/FORMATEUR INFO*/
 .stagiaire-container{
   display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 
@@ -360,9 +361,6 @@ select {
   }
 
 /*STAGIAIRE INFO*/  
-  .stagiaire-container{
-    flex-direction: column;
-  }
 
   .stagiaire-info, .stagiaire-sessions{
     width: 100%

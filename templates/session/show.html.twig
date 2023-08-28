@@ -100,16 +100,17 @@
             <div class="ajout-module">
                 <table><thead><th>AJOUT D'UN MODULE A LA SESSION</th></thead></table>
                 
-
-                {{ form_start(formAddProgramme) }}
-                    {{ form_row(formAddProgramme.module) }}
-                    {{ form_row(formAddProgramme.nbJours) }}
+                <div class="programme-form">
+                    {{ form_start(formAddProgramme) }}
+                        {{ form_row(formAddProgramme.module) }}
+                        {{ form_row(formAddProgramme.nbJours) }}
             
-                    <div class="btn-container">
-                        <button type="submit" class="pgr-btn">AJOUTER AU PROGRAMME</button>
-                    </div>
+                        <div class="btn-container">
+                            <button type="submit" class="pgr-btn">AJOUTER AU PROGRAMME</button>
+                        </div>
 
-                {{ form_end(formAddProgramme) }}
+                    {{ form_end(formAddProgramme) }}
+                </div>
             </div>
     </div>
 

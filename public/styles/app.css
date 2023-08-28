@@ -299,6 +299,11 @@ select {
   display: none;
 }
 
+.programme-form{
+  width: 75%;
+  margin: auto;
+}
+
 /*STAGIAIRE/FORMATEUR INFO*/
 .stagiaire-options{
   display: flex;
@@ -374,6 +379,11 @@ select {
   .stagiaires-out { order: 2; }
   .modules { order: 3; }
   .ajout-module { order: 4; }
+
+  .programme-form{
+    width: 100%;
+  }
+  
 
 
 /*STAGIAIRE/FORMATEUR LIST*/

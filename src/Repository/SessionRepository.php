@@ -51,4 +51,31 @@ class SessionRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    /*récupérer les modules non programmés dans une session donnée*/
+    public function findNonProgramme($session_id){
+        $em = $this->getEntityManager();
+        $sub = $em->createQueryBuilder();
+
+        $qb = $sub;
+        // sélectionner tous les modules d'une session dont l'id est passé en paramètre
+        $qb->select('p')
+            ->from('App\Entity\Programme', 'p')
+            ->leftJoin('p.session', 's')
+            ->where('s.id = :id');
+
+        $sub = $em->createQueryBuilder();
+        // sélectionner tous les modules qui ne SONT PAS (NOT IN) dans le résultat précédent
+        // on obtient donc les modules non  pour une session définie
+        $sub->select('po')
+            ->from('App\Entity\Programme', 'po')
+            ->where($sub->expr()->notIn('po.id', $qb->getDQL()))
+            // requête paramétrée
+            ->setParameter('id', $session_id);
+    
+        // renvoyer le résultat
+        $query = $sub->getQuery();
+
+        return $query->getResult();
+    }
+
 }

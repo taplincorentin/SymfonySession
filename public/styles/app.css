@@ -142,8 +142,7 @@ select {
   border-collapse: collapse; 
   background:white;
   border-radius:6px;
-  overflow:hidden;
-  max-width:800px; 
+  overflow:hidden; 
   width:100%;
   margin:0 auto;
   position:relative;
@@ -240,7 +239,6 @@ select {
   background:white;
   border-radius:6px;
   overflow:hidden;
-  max-width:800px; 
   width:100%;
   margin:0 auto;
   position:relative;
@@ -319,3 +317,59 @@ select {
   text-align: center;
   background-color: #ecf3da;
 }
+
+/*media queries*/
+@media only screen and (max-width: 640px) {
+  /* For mobile phones: */
+  main{flex-direction: column;}
+  
+/*SESSION LIST*/
+  .sessions{
+    text-align: center;
+  }
+  .current-sessions, .future-sessions, .past-sessions{
+    flex-direction: column;
+  }
+
+  .session-box{
+    width: 100%;
+  }
+
+/*SESSION INFO*/
+  .session-page{
+    flex-direction: column;
+  }
+  
+  .stagiaires-in, .stagiaires-out, .modules, .ajout-module {
+    width: 100%;
+  }
+
+  .stagiaires-in { order: 1; }
+  .stagiaires-out { order: 2; }
+  .modules { order: 3; }
+  .ajout-module { order: 4; }
+
+
+/*STAGIAIRE/FORMATEUR LIST*/
+  .effectif{
+    flex-direction: column;
+  }
+
+  .stagiaires, .formateurs {
+    width: 100%;
+  }
+
+/*STAGIAIRE INFO*/  
+  .stagiaire-container{
+    flex-direction: column;
+  }
+
+  .stagiaire-info, .stagiaire-sessions{
+    width: 100%
+  }
+
+  .nav-stagiaires, .nav-sessions{
+    width: 100%;
+  }
+}
+

@@ -52,9 +52,8 @@
                     <thead>
                         <tr>
                             <th>STAGIAIRES NON-INSCRITS</th>
-                            {% if session.nbPlaces - nbInscrits > 0 %}
-                                <th></th>
-                            {% endif %}
+                            <th></th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -100,7 +99,6 @@
                 
 
                 {{ form_start(formAddProgramme) }}
-            
                     {{ form_row(formAddProgramme.module) }}
                     {{ form_row(formAddProgramme.nbJours) }}
             

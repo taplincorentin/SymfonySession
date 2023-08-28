@@ -4,6 +4,11 @@
   
 }
 
+:root {
+  --grey: #75858e;
+  --green: #ecf3da;
+}
+
 a{
   text-decoration: none;
   color: black;
@@ -15,7 +20,7 @@ a{
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #75858e;
+  background-color: var(--grey);
 }
 
 .menu li {
@@ -44,7 +49,7 @@ a{
 .dropdown-elements {
   display: none;
   position: absolute;
-  background-color: #75858e;
+  background-color: var(--grey);
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -112,7 +117,7 @@ select {
 }
 
 .btn { /* Set a style for the submit button */
-  background-color: #75858e;
+  background-color: var(--grey);
   color: white;
   cursor: pointer;
   opacity: 0.9;
@@ -160,12 +165,12 @@ select {
 
 
 .effectif tbody tr:hover {
-  background-color: #ecf3da;
+  background-color: var(--green);
 }
 
 .effectif thead tr { 
   height:60px;
-  background:#ecf3da;
+  background:var(--green);
   font-size:16px;
 }
   
@@ -189,7 +194,7 @@ select {
   border: solid black 1px;
   width: 33%;
   text-align: center;
-  background-color: #ecf3da;
+  background-color: var(--green);
 }
 
 .session-title {
@@ -256,16 +261,16 @@ select {
 
 
 .stagiaires-in tbody tr:hover {
-  background-color: #ecf3da;
+  background-color: var(--green);
 }
 
 .stagiaires-out tbody tr:hover {
-  background-color: #ecf3da;
+  background-color: var(--green);
 }
 
 .session-page thead tr { 
   height:60px;
-  background:#ecf3da;
+  background:var(--green);
   font-size:16px;
 }
   
@@ -275,7 +280,7 @@ select {
 
 
 .pgr-btn { /* Set a style for the programme submit button */
-  background-color: #75858e;
+  background-color: var(--grey);
   color: white;
   cursor: pointer;
   opacity: 0.9;
@@ -284,6 +289,10 @@ select {
 
 .pgr-btn:hover {
   opacity: 1;
+}
+
+.ajout-module:has(#programme_form_module:empty) {
+  display: none;
 }
 
 /*STAGIAIRE/FORMATEUR INFO*/
@@ -295,7 +304,7 @@ select {
 
 .stagiaire-info{
   width: 50%;
-  border: solid 1px #ecf3da;
+  border: solid 1px var(--green);
 }
 
 .stagiaire-sessions{
@@ -316,11 +325,11 @@ select {
   border: solid black 1px;
   width: 33%;
   text-align: center;
-  background-color: #ecf3da;
+  background-color: var(--green);
 }
 
 /*media queries*/
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 700px) {
   /* For mobile phones: */
   main{flex-direction: column;}
   

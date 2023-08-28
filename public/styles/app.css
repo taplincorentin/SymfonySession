@@ -186,7 +186,7 @@ select {
   
 }
 
-.session-box{
+.session-box, .stagiaire-session{
   border: solid black 1px;
   width: 33%;
   text-align: center;
@@ -200,7 +200,7 @@ select {
 }
 
 /*SESSION INFO*/
-.session-name {
+.session-name, .person-name {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -286,4 +286,36 @@ select {
 
 .pgr-btn:hover {
   opacity: 1;
+}
+
+/*STAGIAIRE/FORMATEUR INFO*/
+.stagiaire-container{
+  display: flex;
+  gap: 10px;
+}
+
+.stagiaire-info{
+  width: 50%;
+  border: solid 1px #ecf3da;
+}
+
+.stagiaire-sessions{
+  width: 50%;
+}
+
+.stagiaire-sessionss {
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}
+
+.stagiaire-session{
+  width: 100%;
+}
+
+.formateur-session{
+  border: solid black 1px;
+  width: 33%;
+  text-align: center;
+  background-color: #ecf3da;
 }

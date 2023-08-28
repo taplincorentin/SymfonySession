@@ -3,27 +3,40 @@
 {% block title %}Détail Stagiaire{% endblock %}
 
 {% block body %}
-
-    <a href="{{ path('edit_stagiaire', {'id': stagiaire.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
-    <a href="{{ path('delete_stagiaire', {'id': stagiaire.id}) }}"><i class="fa-solid fa-trash"></i></a>
-
-    <div class="stagiaireInfo">
+    <div class='person-name'>
         <h1>{{ stagiaire }}</h1>
-        <p>Sexe : {{stagiaire.sexe}}</p>
-        <p>Date de naissance : {{stagiaire.dateNaissance | date('d/m/Y')}}</p>
-        <p>Ville : {{stagiaire.ville}}</p>
-        <p>Email : {{stagiaire.email}}</p>
-        <p>Téléphone : {{stagiaire.telephone}}</p>
+        <div>
+            <a href="{{ path('edit_stagiaire', {'id': stagiaire.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+            <a href="{{ path('delete_stagiaire', {'id': stagiaire.id}) }}"><i class="fa-solid fa-trash"></i></a>
+        </div>
     </div>
+    <div class="stagiaire-container">
 
-    <div class="stagiaireSessions">
-        <h3>Prochaines sessions</h3>
-        {% for session in stagiaire.sessions %}
-        
-            <p><a href="{{ path('show_session', {'id': session.id}) }}">{{ session }}</a> du {{session.dateDebut | date('d/m/Y') ~ ' au ' ~ session.dateFin | date('d/m/Y') }}</p>
-        
-        {% endfor %}
+        <div class="stagiaire-info">
+            
+            <div>
+                <h3>Informations personnelles</h3>
+                <p>Sexe : {{stagiaire.sexe}}</p>
+                <p>Date de naissance : {{stagiaire.dateNaissance | date('d/m/Y')}}</p>
+                <p>Ville : {{stagiaire.ville}}</p>
+            </div>
+            <div>
+                <p><i class="fa-solid fa-envelope fa-lg"></i> : {{stagiaire.email}}</p>
+                <p><i class="fa-solid fa-phone fa-lg"></i> : {{stagiaire.telephone}}</p>
+            </div>
+        </div>
+
+        <div class="stagiaire-sessions">
+            <h3>Prochaines sessions</h3>
+            <div class="stagiaire-sessionss">    
+            {% for session in stagiaire.sessions %}
+                <div class="stagiaire-session">
+                    <p><a href="{{ path('show_session', {'id': session.id}) }}">{{ session }}</a></p>
+                    <p>du {{session.dateDebut | date('d/m/Y') ~ ' au ' ~ session.dateFin | date('d/m/Y') }}</p>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
     </div>
-    
 
 {% endblock %}

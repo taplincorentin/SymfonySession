@@ -3,19 +3,27 @@
 {% block title %}Détail Formateur{% endblock %}
 
 {% block body %}
-
-    <a href="{{ path('edit_formateur', {'id': formateur.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
-    <a href="{{ path('delete_formateur', {'id': formateur.id}) }}"><i class="fa-solid fa-trash"></i></a>
+    <div class='person-name'>
+        <h1>{{ formateur }}</h1>
+        <div>
+            <a href="{{ path('edit_formateur', {'id': formateur.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+            <a href="{{ path('delete_formateur', {'id': formateur.id}) }}"><i class="fa-solid fa-trash"></i></a>
+        </div>
+    </div>
+    
     
     <div class="formateurInfo">
-        <h1>{{ formateur }}</h1>
-        <p>Email : {{formateur.email}}</p>
+        
+        <p><i class="fa-solid fa-envelope fa-lg"></i> : {{formateur.email}}</p>
     </div>
 
-    <div class="formateurSessions">
+    <div class="formateur-sessions">
         <h3>Prochaines sessions</h3>
         {% for session in formateur.sessions %}
-            <p><a href='{{ path('show_session', {'id': session.id}) }}'>{{ session}}</a> du {{ session.dateDebut | date('d/m/Y') ~ ' au ' ~ session.dateFin | date('d/m/Y') }}</p>
+            <div class="formateur-session">
+                <p><a href='{{ path('show_session', {'id': session.id}) }}'>{{ session}}</a></p>
+                <p>du {{ session.dateDebut | date('d/m/Y') ~ ' au ' ~ session.dateFin | date('d/m/Y') }}</p>
+            </div>
         {% endfor %}
     </div>
     

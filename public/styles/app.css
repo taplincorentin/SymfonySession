@@ -91,16 +91,20 @@ hr {
 .form-body {
   padding: 20px;
   background-color: white;
-  width : 95%;
+  margin: auto;
+  width: 700px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+
 }
 
 form{
   display: flex;
   flex-direction: column;
   justify-content: center;
+
 }
 
 select {
@@ -182,6 +186,9 @@ select {
 .sessions {
   display: flex;
   flex-direction: column;
+  margin: auto;
+  width: 1000px;
+  padding: 10px;
 }
 
 .future-sessions, .current-sessions, .past-sessions{
@@ -192,7 +199,7 @@ select {
 
 .session-box, .stagiaire-session{
   border: solid black 1px;
-  width: 33%;
+  width: 50%;
   text-align: center;
   background-color: var(--green);
 }
@@ -296,22 +303,30 @@ select {
 }
 
 /*STAGIAIRE/FORMATEUR INFO*/
+.stagiaire-options{
+  display: flex;
+  justify-content: flex-end;
+}
 .stagiaire-container{
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin: auto;
+  width: 700px;
+  padding: 10px;
 }
 
 .stagiaire-info{
-  width: 50%;
+  width: 100%;
   border: solid 1px var(--green);
 }
 
 .stagiaire-sessions{
-  width: 50%;
+  width: 100%;
 }
 
 .stagiaire-sessionss {
+  width: 100%;
   display: flex;
   gap: 5px;
   flex-direction: column;
@@ -335,6 +350,7 @@ select {
   
 /*SESSION LIST*/
   .sessions{
+    width: 100%;
     text-align: center;
   }
   .current-sessions, .future-sessions, .past-sessions{
@@ -377,6 +393,11 @@ select {
 
   .nav-stagiaires, .nav-sessions{
     width: 100%;
+  }
+
+/*FORMS*/
+.form-body {
+  width: 95%;
   }
 }
 

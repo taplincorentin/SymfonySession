@@ -5,11 +5,11 @@
 {% block body %}
     <div class='session-name'>
         <h1>{{ session }}</h1>
-        <a class='delete-session' href="{{ path('delete_session', {'id': session.id}) }}"><i class="fa-solid fa-trash fa-lg"></i></a>
+        <a class='delete-session' href="{{ path('delete_session', {'id': session.id}) }}" onclick="return confirm('êtes-vous sûr(e)?')"><i class="fa-solid fa-trash fa-lg"></i></a>
         
     </div>
     <div class="session-formateur">
-        <p>Formateur : <a href="{{ path('show_formateur', {'id': session.formateur.id}) }}">{{ session.formateur }}</a></p>
+        <p>Formateur : <a href="{{ path('show_formateur', {'id': session.formateur.id}) }}" >{{ session.formateur }}</a></p>
         
         {% set nbInscrits = 0 %}
         {% for stagiaire in session.stagiaires %}
@@ -87,7 +87,7 @@
                             <tr>
                                 <td>{{ programme.module.nom }}</td>
                                 <td>{{ programme.nbJours }} jours</td>
-                                <td><a href="{{ path('delete_programme', {'id': programme.id}) }}"><i class="fa-solid fa-trash"></i></a></td>
+                                <td><a href="{{ path('delete_programme', {'id': programme.id}) }}" onclick="return confirm('êtes-vous sûr(e)?')"><i class="fa-solid fa-trash"></i></a></td>
                             </tr>
                         {% endfor %}
                     </tbody>

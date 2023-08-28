@@ -3,19 +3,18 @@
 {% block title %}Détail Stagiaire{% endblock %}
 
 {% block body %}
-    <div class='person-name'>
-        <h1>{{ stagiaire }}</h1>
-        <div>
+        <div class="stagiaire-options">
             <a href="{{ path('edit_stagiaire', {'id': stagiaire.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
-            <a href="{{ path('delete_stagiaire', {'id': stagiaire.id}) }}"><i class="fa-solid fa-trash"></i></a>
+            <a href="{{ path('delete_stagiaire', {'id': stagiaire.id}) }}" onclick="return confirm('êtes-vous sûr(e)?')"><i class="fa-solid fa-trash"></i></a>
         </div>
-    </div>
     <div class="stagiaire-container">
 
         <div class="stagiaire-info">
             
             <div>
                 <h3>Informations personnelles</h3>
+                <p>Nom : {{stagiaire.nom}}</p>
+                <p>Prénom : {{stagiaire.prenom}}</p>
                 <p>Sexe : {{stagiaire.sexe}}</p>
                 <p>Date de naissance : {{stagiaire.dateNaissance | date('d/m/Y')}}</p>
                 <p>Ville : {{stagiaire.ville}}</p>

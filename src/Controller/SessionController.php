@@ -56,14 +56,16 @@ class SessionController extends AbstractController
     }
 
     #[Route('/session/new', name: 'new_session')]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response {
+    #[Route('/session/{id}/edit', name: 'edit_session')]
+    public function new(Session $session = null, Request $request, EntityManagerInterface $entityManager): Response {
 
-        $session = new Session();
+        if(!$session) { //condition if no stagiaire create new one otherwise it's an edit of the existing one
+            $session = new Session();
+        }
 
         $form = $this->createForm(SessionType::class, $session);
 
         $form->handleRequest($request); 
-
         if ($form->isSubmitted() && $form->isValid()) { //if form submitted and valid
             
             $session = $form->getData();

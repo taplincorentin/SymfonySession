@@ -5,7 +5,10 @@
 {% block body %}
     <div class='session-name'>
         <h1>{{ session }}</h1>
-        <a class='delete-session' href="{{ path('delete_session', {'id': session.id}) }}" onclick="return confirm('êtes-vous sûr(e)?')"><i class="fa-solid fa-trash fa-lg"></i></a>
+        <div>
+            <a href="{{ path('edit_session', {'id': session.id}) }}"><i class="fa-solid fa-pen-to-square fa-lg"></i></a>
+            <a href="{{ path('delete_session', {'id': session.id}) }}" onclick="return confirm('êtes-vous sûr(e)?')"><i class="fa-solid fa-trash fa-lg"></i></a>
+        </div>
         
     </div>
     <div class="session-formateur">

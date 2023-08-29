@@ -3,29 +3,34 @@
 {% block title %}Détail Formateur{% endblock %}
 
 {% block body %}
-    <div class='person-name'>
-        <h1>{{ formateur }}</h1>
-        <div>
-            <a href="{{ path('edit_formateur', {'id': formateur.id}) }}"><i class="fa-solid fa-pen-to-square fa-lg"></i></a>
-            <a href="{{ path('delete_formateur', {'id': formateur.id}) }}" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer le formateur ?')"><i class="fa-solid fa-trash fa-lg"></i></a>
+    <div class='stagiaire-options'>
+        <a href="{{ path('edit_formateur', {'id': formateur.id}) }}"><i class="fa-solid fa-pen-to-square fa-lg"></i></a>
+        <a href="{{ path('delete_formateur', {'id': formateur.id}) }}" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer le formateur ?')"><i class="fa-solid fa-trash fa-lg"></i></a>
+    </div>
+    
+    
+    <div class="stagiaire-container">
+
+        <div class="stagiaire-info">
+            
+            <div>
+                <h3>Informations personnelles</h3>
+                <p>Nom : {{formateur.nom}}</p>
+                <p>Prénom : {{formateur.prenom}}</p>
+                <p><i class="fa-solid fa-envelope fa-lg"></i> : {{formateur.email}}</p>
+            </div>
+        </div>
+
+        <div class="stagiaire-sessions">
+            <div class="stagiaire-sessionss">    
+                <h3>Prochaines sessions</h3>
+                {% for session in formateur.sessions %}
+                    <div class="stagiaire-session">
+                        <p><a href='{{ path('show_session', {'id': session.id}) }}'>{{ session}}</a></p>
+                        <p>du {{ session.dateDebut | date('d/m/Y') ~ ' au ' ~ session.dateFin | date('d/m/Y') }}</p>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
-    
-    
-    <div class="formateurInfo">
-        
-        <p><i class="fa-solid fa-envelope fa-lg"></i> : {{formateur.email}}</p>
-    </div>
-
-    <div class="formateur-sessions">
-        <h3>Prochaines sessions</h3>
-        {% for session in formateur.sessions %}
-            <div class="formateur-session">
-                <p><a href='{{ path('show_session', {'id': session.id}) }}'>{{ session}}</a></p>
-                <p>du {{ session.dateDebut | date('d/m/Y') ~ ' au ' ~ session.dateFin | date('d/m/Y') }}</p>
-            </div>
-        {% endfor %}
-    </div>
-    
-
 {% endblock %}

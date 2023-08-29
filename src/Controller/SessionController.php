@@ -19,34 +19,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class SessionController extends AbstractController
 {
     #[Route('/session', name: 'app_session')]
-    public function index(SessionRepository $sessionRepository/*, EntityManagerInterface $entityManager*/): Response
+    public function index(SessionRepository $sessionRepository, EntityManagerInterface $entityManager): Response
     {
         $sessions = $sessionRepository->findBy([], ["dateDebut" => "ASC"]); //get all sessions sorted from startDate
 
         //Before returning session list, group sessions ( finished, in progress, in future)
 
-        $dateJour = new DateTime();         //get today's date
+        $pastSessions = $entityManager->getRepository(Session::class)->findPastSessions();          //Get list of finished sessions
+        $currentSessions = $entityManager->getRepository(Session::class)->findCurrentSessions();    //Get list of current sessions
+        $futureSessions = $entityManager->getRepository(Session::class)->findFutureSessions();      //Get list of future sessions
 
-        $pastSessions = $currentSessions = $futureSessions = []; //initialize variables to store sessions that meet conditions
 
-        //Loop through list of sessions
-        foreach ($sessions as $session) {
-        
-            $dateDebut = $session->getDateDebut(); //session dates that we will compare to today's date
-            $dateFin  = $session->getDateFin();
-            
-            //Conditions
-            if($dateDebut>$dateJour){       //in future
-                $futureSessions []= $session;
-            }
-            else if($dateFin<$dateJour){    //finished
-                $pastSessions []= $session;
-            }
-            else {                          //in progress
-                $currentSessions []= $session;
-            }
-
-        }
         return $this->render('session/index.html.twig', [
             'sessions' => $sessions,
             'currentSessions' => $currentSessions,

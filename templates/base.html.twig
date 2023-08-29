@@ -21,7 +21,7 @@
                 <li class="nav-sessions"><a href="{{ path('app_session') }}">SESSIONS</a></li>
                 <li class="nav-stagiaires"><a href="{{ path('app_stagiaire') }}">FORMATEURS/STAGIAIRES</a></li>
                 <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn"><i class="fa-solid fa-plus fa-lg"></i></a>
+                    <a href="javascript:void(0)" class="dropbtn"><i class="fa-solid fa-plus fa-xl"></i></a>
                     <div class="dropdown-elements">
                         <a href="{{ path('new_session') }}">+SESSION</a>
                         <a href="{{ path('new_formateur') }}">+FORMATEUR</a>
@@ -29,9 +29,9 @@
                         <a href="{{ path('new_module') }}">+MODULE</a>
                     </div>
                 </li>
-                <li style="float:right"><a href="{{ path('app_logout') }}"><i class="fa-solid fa-right-from-bracket fa-lg"></i></a></li>
+                <li style="float:right"><a href="{{ path('app_logout') }}" onclick="return confirm('Êtes-vous sûr(e) de vouloir vous déconnecter?')"><i class="fa-solid fa-right-from-bracket fa-xl"></i></a></li>
             {% if is_granted("ROLE_ADMIN") %} <!-- only admin can go to registration page -->
-                <li style="float:right"><a href="{{ path('app_register') }}"><i class="fa-solid fa-user-plus fa-lg"></i></a></li>
+                <li style="float:right"><a href="{{ path('app_register') }}"><i class="fa-solid fa-user-plus fa-xl"></i></a></li>
             {% endif %}
                 
             </ul>

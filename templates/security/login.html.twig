@@ -14,18 +14,25 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+<div class="form-body">
+    <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
+    <p>Remplissez le formulaire pour pouvoir vous connecter</p>
+
+    <hr>
+
     <label for="inputEmail">Email</label>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
+    
+    <label for="inputPassword">Mot de passe</label>
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
     <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+           value="{{ csrf_token('authenticate') }}">
 
+    <hr>
     <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
+        SE CONNECTER
     </button>
-</form>
+</div>
+
 {% endblock %}

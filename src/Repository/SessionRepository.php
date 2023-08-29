@@ -6,14 +6,6 @@ use App\Entity\Session;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
-/**
- * @extends ServiceEntityRepository<Session>
- *
- * @method Session|null find($id, $lockMode = null, $lockVersion = null)
- * @method Session|null findOneBy(array $criteria, array $orderBy = null)
- * @method Session[]    findAll()
- * @method Session[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
 
 class SessionRepository extends ServiceEntityRepository
 {
@@ -21,6 +13,24 @@ class SessionRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Session::class);
     }
+
+    /** Get number of stagaires that are part of a session */
+    public function findInscrits($session_id)
+    {
+        $em = $this->getEntityManager();
+        $qb= $em->createQueryBuilder();
+        
+        $qb->select('s')
+            ->from('App\Entity\Stagiaire', 's')
+            ->leftJoin('s.sessions', 'se')                              //select all stagiaires that are part of the session
+            ->where('se.id = :id')
+            ->setParameter('id', $session_id)                           //set parameter
+            ->orderBy('s.nom');   
+        
+        $query = $qb->getQuery();                                       //return result
+        return $query->getResult();
+    }
+
 
     /** Get stagaires that are not part of a session */
     public function findNonInscrits($session_id)
@@ -93,25 +103,25 @@ class SessionRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    
+
     /** Get modules that are not part of a session **/
     public function findNonProgramme($session_id){
         $em = $this->getEntityManager();
         $sub = $em->createQueryBuilder();
 
         $qb = $sub;
-        $qb->select('p')
-            ->from('App\Entity\Programme', 'p')
-            ->leftJoin('p.session', 's')
-            ->where('s.id = :id');
+        $qb->select('m')
+            ->from('App\Entity\Module', 'm')
+            ->leftJoin('m.programmes', 'p')
+            ->where('p.session = :id');
 
         $sub = $em->createQueryBuilder();
 
-        $sub->select('po')
-            ->from('App\Entity\Programme', 'po')
-            ->where($sub->expr()->notIn('po.id', $qb->getDQL()))
-            ->setParameter('id', $session_id);
-    
+        $sub->select('mo')
+            ->from('App\Entity\Module', 'mo')
+            ->where($sub->expr()->notIn('mo.id', $qb->getDQL()))
+            ->setParameter('id', $session_id)
+            ->orderBy('mo.nom');
 
         $query = $sub->getQuery();
 

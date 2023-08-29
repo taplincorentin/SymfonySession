@@ -67,6 +67,7 @@ class SessionController extends AbstractController
 
 
     #[Route('/session/{id}/delete', name: 'delete_session')]
+
     public function delete(Session $session, EntityManagerInterface $entityManager) {
         
         $entityManager->remove($session);
@@ -95,64 +96,64 @@ class SessionController extends AbstractController
     //move stagiaire to a session
     #[Route('/session/{session_id}/{stagiaire_id}/move', name: 'enlist_stagiaire')]
     public function moveStagiaireToSession(Session $session_id, int $stagiaire_id, EntityManagerInterface $entityManager) {
-
+        
         $session = $entityManager->getRepository(Session::class)->findOneBy(['id'=>$session_id]);
         $stagiaire = $entityManager->getRepository(Stagiaire::class)->findOneBy(['id'=>$stagiaire_id]);
-        
-        $session->addStagiaire($stagiaire);
-        $entityManager->persist($session);
-        $entityManager->flush();
 
-        return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+        $nbInscrits = count($session->getStagiaires());                                                                         //Get number of stagiaire that are part of this session                            
+        
+        if( $session->getNbPlaces()-$nbInscrits > 0 ) {                                                                             //Check there are places remaining in the session before moving
+            $session->addStagiaire($stagiaire);
+            $entityManager->persist($session);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+        }
+
+        else {
+            return $this->redirectToRoute('app_home');
+        }
+        
     }
 
 
 
     #[Route('/session/{id}', name: 'show_session')]
-    public function show(Session $session, ModuleRepository $moduleRepository, Request $request, EntityManagerInterface $entityManager): Response {
+    public function show(Session $session = null, ModuleRepository $moduleRepository, Request $request, EntityManagerInterface $entityManager): Response {
 
-        $nonInscrits = $entityManager->getRepository(Session::class)->findNonInscrits($session->getId()); //Get list of stagiaire that aren't part of this session
-        
-        $nonProgramme = $entityManager->getRepository(Session::class)->findNonProgramme($session->getId()); //Get list of modules that aren't part of this session
+        if($session) {
+            $nonInscrits = $entityManager->getRepository(Session::class)->findNonInscrits($session->getId());                   //Get list of stagiaire that aren't part of this session
+            
+            $nonSessionModules = $entityManager->getRepository(Session::class)->findNonProgramme($session->getId());            //Get list of modules that aren't part of this session
 
-        dd($nonProgramme);
-        
-        $modules = $moduleRepository->findAll();            //get all modules
-        $sessionModules = $nonSessionModules = [];          //initialize variables to store modules that are/aren't already part of the session
-        $programmes = $session->getProgrammes();            //get programmes of this session
-        
-        foreach($programmes as $programme){                 //loop through this session's programmes
-            $sessionModules []= $programme->getModule();    //get and store each programme's module
-        }
-
-        foreach($modules as $module){                       //loop through all modules
-            if (!in_array($module, $sessionModules)){       //if module not in array of modules that are in this session 
-                $nonSessionModules []= $module;             //store module in nonSessionModules
+            $programme = new Programme();
+            $form = $this->createForm(ProgrammeFormType::class, $programme, array('nonSessionModules' => $nonSessionModules));  //create programme form using modules that are not in session
+            
+            $form->handleRequest($request); 
+            
+            if ($form->isSubmitted() && $form->isValid()) { 
+                
+                $programme = $form->getData();
+                $programme->setSession($session);
+                $entityManager->persist($programme); //prepare
+                $entityManager->flush(); //execute
+    
+                
+                return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+    
             }
+    
+    
+            return $this->render('session/show.html.twig', [
+                'session' => $session, 
+                'nonInscrits' => $nonInscrits,
+                'formAddProgramme' => $form,
+            ]);
+        } 
+        
+        else {
+            return $this->redirectToRoute('app_home');
         }
 
-        $programme = new Programme();
-        $form = $this->createForm(ProgrammeFormType::class, $programme, array('nonSessionModules' => $nonSessionModules)); //create programme form using modules that are not in session
-        
-        $form->handleRequest($request); 
-        
-        if ($form->isSubmitted() && $form->isValid()) { 
-            
-            $programme = $form->getData();
-            $programme->setSession($session);
-            $entityManager->persist($programme); //prepare
-            $entityManager->flush(); //execute
-
-            
-            return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
-
-        }
-
-
-        return $this->render('session/show.html.twig', [
-            'session' => $session, 
-            'nonInscrits' => $nonInscrits,
-            'formAddProgramme' => $form,
-        ]);
     }
 }

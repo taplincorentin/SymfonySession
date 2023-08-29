@@ -58,10 +58,15 @@ class FormateurController extends AbstractController
     }
 
     #[Route('/formateur/{id}', name: 'show_formateur')]
-    public function show(Formateur $formateur): Response {
+    public function show(Formateur $formateur = null): Response {
 
-        return $this->render('formateur/show.html.twig', [
-            'formateur' => $formateur
-        ]);
+        if($formateur){
+            return $this->render('formateur/show.html.twig', [
+                'formateur' => $formateur
+            ]);
+        }
+        else {
+            return $this->redirectToRoute('app_stagiaire');
+        }
     }
 }
